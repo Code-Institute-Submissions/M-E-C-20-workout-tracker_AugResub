@@ -1,27 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 
-    {% for routine in routines %}
-        {{ routine.exercise_name }}<br>
-        {{ routine.weight }}<br>
-        {{ routine.sets_x_reps }}<br>
-        {{ routine.completed }}<br>
-        {{ routine.date_performed }}<br>
-    {% endfor %}
-
     <ul class="collapsible">
+        {% for routine in routines %}
         <li>
-            <div class="collapsible-header white-text light-blue darken-4 text-shadow"><i class="fas fa-caret-down"></i>First</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            <div class="collapsible-header white-text light-blue darken-4 text-shadow"><i class="fas fa-caret-down"></i>
+                <strong>{{ routine.exercise_name }}</strong> : {{ routine.date_performed }}
+                {% if routine.completed == "on" %}
+                <i class="fas fa-exclamation-circle light-blue-text text-lighten-2 tooltipped" data-position="right"
+                    data-tooltip="Completed"></i>
+                {% endif %}
+            </div>
+            <div class="collapsible-body">
+                <strong>{{ routine.weight }}</strong>
+                <p>{{ routine.sets_x_reps }}</p>
+            </div>
         </li>
-        <li>
-            <div class="collapsible-header white-text light-blue darken-4 text-shadow"><i class="fas fa-caret-down"></i>Second</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
-        <li>
-            <div class="collapsible-header white-text light-blue darken-4 text-shadow"><i class="fas fa-caret-down"></i>Third</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
+        {% endfor %}
     </ul>
 
 {% endblock %}

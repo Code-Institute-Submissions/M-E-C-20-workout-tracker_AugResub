@@ -21,7 +21,7 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/get_routines")
 def get_routines():
-    routines = mongo.db.routines.find()
+    routines = list(mongo.db.routines.find())
     return render_template("routines.html", routines=routines)
 
 
