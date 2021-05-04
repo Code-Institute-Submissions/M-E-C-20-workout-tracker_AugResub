@@ -106,7 +106,8 @@ def logout():
 
 @app.route("/add_exercise")
 def add_exercise():
-    return render_template("add_exercise.html")
+    exercise = mongo.db.exercise.find().sort("exercise_name", 1)
+    return render_template("add_exercise.html", exercise=exercise)
 
 
 if __name__ == "__main__":

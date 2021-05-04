@@ -7,10 +7,14 @@
         <form class="col s12" method="POST" action="">
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="fas fa-pencil-alt prefix light-blue-text text-darken-4"></i>
-                    <input id="exercise_name" name="exercise_name" minlength="2" maxlength="15" type="text"
-                        class="validate" required>
-                    <label for="exercise_name">Exercise Name</label>
+                    <i class="fas fa-folder-open prefix light-blue-text text-darken-4"></i>
+                    <select id="exercise_name" name="exercise_name" class="validate" required>
+                        <option value="" disabled selected>Choose your exercise</option>
+                        {% for exercises in exercise %}
+                            <option value="{{ exercises.exercise_name }}">{{ exercises.exercise_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="exercise_name">Exercise Category</label>
                 </div>
             </div>
             <div class="row">
