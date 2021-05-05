@@ -111,8 +111,8 @@ def add_exercise():
         routine = {
             "exercise_name": request.form.get("exercise_name"),
             "weight": request.form.get("weight"),
-            "sets_x_reps": request.form.get("sets_x_reps"),
-            "sets": request.form.get("reps"),
+            "sets": request.form.get("sets"),
+            "reps": request.form.get("reps"),
             "completed": completed,
             "date_performed": request.form.get("date_performed"),
             "created_by": session["user"]
@@ -120,7 +120,7 @@ def add_exercise():
         mongo.db.routines.insert_one(routine)
         flash("Routine Successfully Added")
         return redirect(url_for("get_routines"))
-        
+
     exercise = mongo.db.exercise.find().sort("exercise_name", 1)
     return render_template("add_exercise.html", exercise=exercise)
 
