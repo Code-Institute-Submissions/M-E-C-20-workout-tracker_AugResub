@@ -4,7 +4,8 @@
     <h3 class="light-blue-text text darken-4 center-align">Add Exercise</h3>
 
     <div class="row card-panel grey lighten-5">
-        <form class="col s12" method="POST" action="">
+        <form class="col s12" method="POST" action="{{ url_for('add_exercise') }}">
+            <!-- exercise -->
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-folder-open prefix light-blue-text text-darken-4"></i>
@@ -17,6 +18,7 @@
                     <label for="exercise_name">Exercise Category</label>
                 </div>
             </div>
+            <!-- weight -->
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-phone prefix light-blue-text text-darken-4"></i>
@@ -24,6 +26,7 @@
                     <label for="weight">Weight</label>
                 </div>
             </div>
+            <!-- sets x reps -->
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-phone prefix light-blue-text text-darken-4"></i>
@@ -31,6 +34,23 @@
                     <label for="sets_x_reps">sets_x_reps</label>
                 </div>
             </div>
+            <!-- sets -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-phone prefix light-blue-text text-darken-4"></i>
+                    <input id="sets" name="sets" minlength="1" maxlength="15" type="tel" class="validate" required>
+                    <label for="sets">sets</label>
+                </div>
+            </div>
+            <!-- reps -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-phone prefix light-blue-text text-darken-4"></i>
+                    <input id="reps" name="reps" minlength="1" maxlength="15" type="tel" class="validate" required>
+                    <label for="reps">reps</label>
+                </div>
+            </div>
+            <!-- date performed -->
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-calendar-alt prefix light-blue-text text-darken-4"></i>
@@ -39,6 +59,7 @@
                     <label for="date_performed">Date Performed</label>
                 </div>
             </div>
+            <!-- completed toggle -->
             <div class="row">
                 <div class="input-field col s12">
                     <div class="switch">
@@ -50,6 +71,14 @@
                             Complete
                         </label>
                     </div>
+                </div>
+            </div>
+            <!-- submit button -->
+            <div class="row">
+                <div class="col s12 center-align">
+                    <button type="submit" class="btn-large light-blue darken-1 text-shadow">
+                        Add Exercise <i class="fas fa-plus-square right"></i>
+                    </button>
                 </div>
             </div>
         </form>
