@@ -139,11 +139,18 @@ def edit_exercise(exercise_id):
             "created_by": session["user"]
         }
         mongo.db.routines.update({"_id": ObjectId(exercise_id)}, submit)
-        flash("Routine Successfully Updated")
+        flash("Exercise Successfully Updated")
 
     routine = mongo.db.routines.find_one({"_id": ObjectId(exercise_id)})
     exercise = mongo.db.exercise.find().sort("exercise_name", 1)
     return render_template("edit_exercise.html", routine=routine, exercise=exercise)
+
+
+@app.route("/delete_exercise/<exercise_id>")
+def delete_exercise(exercise_id):
+    mongo.db.routines.remove({"_id": ObjectId(exercise_id)})
+    flash("Exercise Successfully Deleted")
+    return redirect(url_for("get_routines"))
 
 
 if __name__ == "__main__":
