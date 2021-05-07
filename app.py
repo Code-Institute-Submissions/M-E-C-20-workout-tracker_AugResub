@@ -127,6 +127,20 @@ def add_exercise():
 
 @app.route("/edit_exercise/<exercise_id>", methods=["GET", "POST"])
 def edit_exercise(exercise_id):
+    if request.method == "POST":
+        completed = "on" if request.form.get("completed") else "off"
+        submit = {
+            "exercise_name": request.form.get("exercise_name"),
+            "weight": request.form.get("weight"),
+            "sets": request.form.get("sets"),
+            "reps": request.form.get("reps"),
+            "completed": completed,
+            "date_performed": request.form.get("date_performed"),
+            "created_by": session["user"]
+        }
+        mongo.db.routines.update({"_id": ObjectId(exercise_id)}, submit)
+        flash("Routine Successfully Updated")
+
     routine = mongo.db.routines.find_one({"_id": ObjectId(exercise_id)})
     exercise = mongo.db.exercise.find().sort("exercise_name", 1)
     return render_template("edit_exercise.html", routine=routine, exercise=exercise)
