@@ -125,6 +125,13 @@ def add_exercise():
     return render_template("add_exercise.html", exercise=exercise)
 
 
+@app.route("/edit_exercise/<exercise_id>", methods=["GET", "POST"])
+def edit_exercise(exercise_id):
+    routine = mongo.db.routines.find_one({"_id": ObjectId(exercise_id)})
+    exercise = mongo.db.exercise.find().sort("exercise_name", 1)
+    return render_template("edit_exercise.html", routine=routine, exercise=exercise)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
