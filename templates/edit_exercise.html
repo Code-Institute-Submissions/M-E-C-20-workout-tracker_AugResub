@@ -10,9 +10,13 @@
                 <div class="input-field col s12">
                     <i class="fas fa-folder-open prefix light-blue-text text-darken-4"></i>
                     <select id="exercise_name" name="exercise_name" class="validate" required>
-                        <option value="" disabled selected>Choose your exercise</option>
+                        <option value="" selected>Choose your exercise</option>
                         {% for exercises in exercise %}
-                            <option value="{{ exercises.exercise_name }}">{{ exercises.exercise_name }}</option>
+                            {% if exercises.exercise_name == routine.exercise_name %}
+                                <option value="{{ exercises.exercise_name }}" selected>{{ exercises.exercise_name }}</option>
+                            {% else %}
+                                <option value="{{ exercises.exercise_name }}">{{ exercises.exercise_name }}</option>
+                            {% endif %}
                         {% endfor %}
                     </select>
                     <label for="exercise_name">Exercise Category</label>
@@ -22,7 +26,8 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-phone prefix light-blue-text text-darken-4"></i>
-                    <input id="weight" name="weight" minlength="1" maxlength="15" type="tel" class="validate" required>
+                    <input id="weight" name="weight" minlength="1" maxlength="15" value="{{ routine.weight }}"
+                        type="tel" class="validate" required>
                     <label for="weight">Weight</label>
                 </div>
             </div>
@@ -30,7 +35,8 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-phone prefix light-blue-text text-darken-4"></i>
-                    <input id="sets" name="sets" minlength="1" maxlength="15" type="tel" class="validate" required>
+                    <input id="sets" name="sets" minlength="1" maxlength="15" value="{{ routine.sets }}" type="tel"
+                        class="validate" required>
                     <label for="sets">sets</label>
                 </div>
             </div>
@@ -38,7 +44,8 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-phone prefix light-blue-text text-darken-4"></i>
-                    <input id="reps" name="reps" minlength="1" maxlength="15" type="tel" class="validate" required>
+                    <input id="reps" name="reps" minlength="1" maxlength="15" value="{{ routine.reps }}" type="tel"
+                        class="validate" required>
                     <label for="reps">reps</label>
                 </div>
             </div>
@@ -46,7 +53,7 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-calendar-alt prefix light-blue-text text-darken-4"></i>
-                    <input id="date_performed" name="date_performed" type="text"
+                    <input id="date_performed" name="date_performed" type="text" value="{{ routine.date_performed }}"
                         class="datepicker validate" required>
                     <label for="date_performed">Date Performed</label>
                 </div>
@@ -57,8 +64,12 @@
                     <div class="switch">
                         <i class="fas fa-exclamation-circle prefix light-blue-text text-darken-4"></i>
                         <label for="completed">
+                            {% if routine.completed == "on" %}
+                                <input type="checkbox" id="completed" name="completed" checked>
+                            {% else %}
                             Not Complete
-                            <input type="checkbox" id="completed" name="completed">
+                                <input type="checkbox" id="completed" name="completed">
+                            {% endif %}
                             <span class="lever"></span>
                             Complete
                         </label>
@@ -68,6 +79,10 @@
             <!-- edit button -->
             <div class="row">
                 <div class="col s12 center-align">
+                    <!-- cancel button -->
+                    <a href="{{ url_for('get_routines') }}" class="btn-large red text-shadow">
+                        Cancel <i class="fas fa-times-circle right"></i>
+                    </a>
                     <button type="submit" class="btn-large light-blue darken-1 text-shadow">
                         Edit Exercise <i class="fas fa-edit right"></i>
                     </button>
