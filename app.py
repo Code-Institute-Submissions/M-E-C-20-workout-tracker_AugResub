@@ -153,6 +153,12 @@ def delete_exercise(exercise_id):
     return redirect(url_for("get_routines"))
 
 
+@app.route("/manage_exercises")
+def manage_exercises():
+    exercises = list(mongo.db.exercise.find().sort("exercise_name", 1))
+    return render_template("exercises.html", exercises=exercises)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
