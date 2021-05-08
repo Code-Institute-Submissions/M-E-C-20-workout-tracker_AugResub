@@ -159,6 +159,19 @@ def manage_exercises():
     return render_template("exercises.html", exercises=exercises)
 
 
+@app.route("/update_exercise_db", methods=["GET", "POST"])
+def update_exercise_db():
+    if request.method == "POST":
+        exercises = {
+            "exercise_name": request.form.get("exercise_name")
+        }
+        mongo.db.exercise.insert_one(exercises)
+        flash("New Exercise Added")
+        return redirect(url_for("manage_exercises"))
+
+    return render_template("update_exercise_db.html")
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
