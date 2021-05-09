@@ -186,6 +186,13 @@ def edit_exercise_db(exercise_id):
     return render_template("edit_exercise_db.html", exercises=exercises)
 
 
+@app.route("/delete_exercise_db/<exercise_id>")
+def delete_exercise_db(exercise_id):
+    mongo.db.exercise.remove({"_id": ObjectId(exercise_id)})
+    flash("Exercise Successfully Deleted")
+    return redirect(url_for("manage_exercises"))
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
