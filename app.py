@@ -19,17 +19,17 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
-@app.route("/get_routines")
-def get_routines():
-    routines = list(mongo.db.routines.find())
-    return render_template("routines.html", routines=routines)
+@app.route("/get_workouts")
+def get_workouts():
+    workouts = list(mongo.db.routines.find())
+    return render_template("workout_planner.html", workouts=workouts)
 
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
     query = request.form.get("query")
-    routines = list(mongo.db.routines.find({"$text": {"$search": query}}))
-    return render_template("routines.html", routines=routines)
+    workouts = list(mongo.db.routines.find({"$text": {"$search": query}}))
+    return render_template("workout_planner.html", workouts=workouts)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -92,16 +92,14 @@ def login():
     return render_template("login.html")
 
 
-@app.route("/profile/<username>", methods=["GET", "POST"])
-def profile(username):
-    # grab the session user's username from the db
+@app.route("/workout_history/<username>", methods=["GET", "POST"])
+def workout_history(username):
+    # grab the session user's username from db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-
-    if session["user"]:
-        return render_template("profile.html", username=username)
-
-    return redirect(url_for("login"))
+    workouts = list(mongo.db.completed_workouts.find())
+    return render_template(
+        "workout_history.html", username=username, workouts=workouts)
 
 
 @app.route("/logout")
@@ -111,11 +109,11 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/add_exercise", methods=["GET", "POST"])
-def add_exercise():
+@app.route("/add_workout", methods=["GET", "POST"])
+def add_workout():
     if request.method == "POST":
         completed = "on" if request.form.get("completed") else "off"
-        routine = {
+        workout = {
             "exercise_name": request.form.get("exercise_name"),
             "weight": request.form.get("weight"),
             "sets": request.form.get("sets"),
@@ -124,16 +122,16 @@ def add_exercise():
             "date_performed": request.form.get("date_performed"),
             "created_by": session["user"]
         }
-        mongo.db.routines.insert_one(routine)
-        flash("Routine Successfully Added")
-        return redirect(url_for("get_routines"))
+        mongo.db.routines.insert_one(workout)
+        flash("Workout Successfully Added")
+        return redirect(url_for("get_workouts"))
 
     exercise = mongo.db.exercise.find().sort("exercise_name", 1)
-    return render_template("add_exercise.html", exercise=exercise)
+    return render_template("add_workout.html", exercise=exercise)
 
 
-@app.route("/edit_exercise/<exercise_id>", methods=["GET", "POST"])
-def edit_exercise(exercise_id):
+@app.route("/edit_workout/<workout_id>", methods=["GET", "POST"])
+def edit_workout(workout_id):
     if request.method == "POST":
         completed = "on" if request.form.get("completed") else "off"
         submit = {
@@ -145,19 +143,57 @@ def edit_exercise(exercise_id):
             "date_performed": request.form.get("date_performed"),
             "created_by": session["user"]
         }
-        mongo.db.routines.update({"_id": ObjectId(exercise_id)}, submit)
-        flash("Exercise Successfully Updated")
+        mongo.db.routines.update({"_id": ObjectId(workout_id)}, submit)
+        flash("Workout Successfully Updated")
 
-    routine = mongo.db.routines.find_one({"_id": ObjectId(exercise_id)})
+    workout = mongo.db.routines.find_one({"_id": ObjectId(workout_id)})
     exercise = mongo.db.exercise.find().sort("exercise_name", 1)
-    return render_template("edit_exercise.html", routine=routine, exercise=exercise)
+    return render_template(
+        "edit_workout.html", workout=workout, exercise=exercise)
 
 
-@app.route("/delete_exercise/<exercise_id>")
-def delete_exercise(exercise_id):
-    mongo.db.routines.remove({"_id": ObjectId(exercise_id)})
-    flash("Exercise Successfully Deleted")
-    return redirect(url_for("get_routines"))
+@app.route("/delete_planned_workout/<workout_id>")
+def delete_planned_workout(workout_id):
+    mongo.db.routines.remove({"_id": ObjectId(workout_id)})
+    flash("Workout Successfully Deleted")
+    return redirect(url_for("get_workouts"))
+
+
+@app.route("/delete_completed_workout/<workout_id>")
+def delete_completed_workout(workout_id):
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+
+    mongo.db.completed_workouts.remove({"_id": ObjectId(workout_id)})
+    flash("Workout Successfully Deleted")
+    return redirect(url_for("workout_history", username=username))
+
+
+@app.route("/complete_workout/<workout_id>", methods=["GET", "POST"])
+def complete_workout(workout_id):
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+
+    if request.method == "POST":
+        completed = "on" if request.form.get("completed") else "off"
+        workout = {
+            "exercise_name": request.form.get("exercise_name"),
+            "weight": request.form.get("weight"),
+            "sets": request.form.get("sets"),
+            "reps": request.form.get("reps"),
+            "completed": completed,
+            "date_performed": request.form.get("date_performed"),
+            "created_by": session["user"]
+        }
+        mongo.db.completed_workouts.insert_one(workout)
+        mongo.db.routines.remove({"_id": ObjectId(workout_id)})
+        flash("Workout Successfully Added")
+        return redirect(url_for("workout_history", username=username))
+
+    workout = mongo.db.routines.find_one({"_id": ObjectId(workout_id)})
+    exercise = mongo.db.exercise.find().sort("exercise_name", 1)
+    return render_template(
+        "complete_workout.html", exercise=exercise, workout=workout, username=username)
 
 
 @app.route("/manage_exercises")

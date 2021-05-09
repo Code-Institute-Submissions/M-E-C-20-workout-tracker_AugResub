@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h3 class="light-blue-text text darken-4 center-align">Edit Workout</h3>
+
+    <div class="row card-panel grey lighten-5">
+        <form class="col s12" method="POST" action="{{ url_for('complete_workout', workout_id=workout._id) }}">
+            <!-- exercise -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-folder-open prefix light-blue-text text-darken-4"></i>
+                    <select id="exercise_name" name="exercise_name" class="validate" required>
+                        <option value="" selected>Choose your exercise</option>
+                        {% for exercises in exercise %}
+                            {% if exercises.exercise_name == workout.exercise_name %}
+                                <option value="{{ exercises.exercise_name }}" selected>{{ exercises.exercise_name }}</option>
+                            {% else %}
+                                <option value="{{ exercises.exercise_name }}">{{ exercises.exercise_name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <label for="exercise_name">Exercise Category</label>
+                </div>
+            </div>
+            <!-- weight -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-phone prefix light-blue-text text-darken-4"></i>
+                    <input id="weight" name="weight" minlength="1" maxlength="15" value="{{ workout.weight }}"
+                        type="tel" class="validate" required>
+                    <label for="weight">Weight</label>
+                </div>
+            </div>
+            <!-- sets -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-phone prefix light-blue-text text-darken-4"></i>
+                    <input id="sets" name="sets" minlength="1" maxlength="15" value="{{ workout.sets }}" type="tel"
+                        class="validate" required>
+                    <label for="sets">sets</label>
+                </div>
+            </div>
+            <!-- reps -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-phone prefix light-blue-text text-darken-4"></i>
+                    <input id="reps" name="reps" minlength="1" maxlength="15" value="{{ workout.reps }}" type="tel"
+                        class="validate" required>
+                    <label for="reps">reps</label>
+                </div>
+            </div>
+            <!-- date performed -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-calendar-alt prefix light-blue-text text-darken-4"></i>
+                    <input id="date_performed" name="date_performed" type="text" value="{{ workout.date_performed }}"
+                        class="datepicker validate" required>
+                    <label for="date_performed">Date Performed</label>
+                </div>
+            </div>
+            <!-- completed toggle -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <div class="switch">
+                        <i class="fas fa-exclamation-circle prefix light-blue-text text-darken-4"></i>
+                        <label for="completed">
+                            {% if workout.completed == "on" %}
+                                <input type="checkbox" id="completed" name="completed" checked>
+                            {% else %}
+                            Not Complete
+                                <input type="checkbox" id="completed" name="completed">
+                            {% endif %}
+                            <span class="lever"></span>
+                            Complete
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!-- buttons -->
+            <div class="row">
+                <div class="col s12 center-align">
+                    <a href="{{ url_for('get_workouts') }}" class="btn-large red text-shadow">
+                        Cancel <i class="fas fa-times-circle right"></i>
+                    </a>
+                    <button type="submit" class="btn-large light-blue darken-1 text-shadow">
+                        Complete Workout <i class="fas fa-edit right"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
