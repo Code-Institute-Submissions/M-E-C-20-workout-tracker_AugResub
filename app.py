@@ -172,6 +172,20 @@ def update_exercise_db():
     return render_template("update_exercise_db.html")
 
 
+@app.route("/edit_exercise_db/<exercise_id>", methods=["GET", "POST"])
+def edit_exercise_db(exercise_id):
+    if request.method == "POST":
+        submit = {
+            "exercise_name": request.form.get("exercise_name")
+        }
+        mongo.db.exercise.update({"_id": ObjectId(exercise_id)}, submit)
+        flash("Exercise Successfully Updated")
+        return redirect(url_for("manage_exercises"))
+
+    exercises = mongo.db.exercise.find_one({"_id": ObjectId(exercise_id)})
+    return render_template("edit_exercise_db.html", exercises=exercises)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
