@@ -59,7 +59,7 @@ def register():
         # put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
         flash("Registration Successful")
-        return redirect(url_for("profile", username=session["user"]))
+        return redirect(url_for("workout_history", username=session["user"]))
     return render_template("register.html")
 
 
@@ -78,7 +78,7 @@ def login():
                         flash("Welcome {},".format(
                             request.form.get("username")))
                         return redirect(
-                            url_for("profile", username=session["user"]))
+                            url_for("workout_history", username=session["user"]))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
@@ -119,7 +119,7 @@ def add_workout():
             "sets": request.form.get("sets"),
             "reps": request.form.get("reps"),
             "completed": completed,
-            "date_performed": request.form.get("date_performed"),
+            "due_date": request.form.get("due_date"),
             "created_by": session["user"]
         }
         mongo.db.routines.insert_one(workout)
@@ -140,7 +140,7 @@ def edit_workout(workout_id):
             "sets": request.form.get("sets"),
             "reps": request.form.get("reps"),
             "completed": completed,
-            "date_performed": request.form.get("date_performed"),
+            "due_date": request.form.get("due_date"),
             "created_by": session["user"]
         }
         mongo.db.routines.update({"_id": ObjectId(workout_id)}, submit)
@@ -182,7 +182,7 @@ def complete_workout(workout_id):
             "sets": request.form.get("sets"),
             "reps": request.form.get("reps"),
             "completed": completed,
-            "date_performed": request.form.get("date_performed"),
+            "due_date": request.form.get("due_date"),
             "created_by": session["user"]
         }
         mongo.db.completed_workouts.insert_one(workout)

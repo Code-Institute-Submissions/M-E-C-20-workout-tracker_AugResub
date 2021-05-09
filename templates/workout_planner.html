@@ -53,11 +53,7 @@
                                     class="btn-small green lighten-1">Done</a>
                             </div>
                             <div class="col s9">
-                                <strong>{{ workout.exercise_name }}</strong> : {{ workout.date_performed }}
-                                {% if workout.completed == "on" %}
-                                    <i class="fas fa-exclamation-circle light-blue-text text-lighten-2 tooltipped" data-position="right"
-                                        data-tooltip="Completed"></i>
-                                {% endif %}
+                                <strong>{{ workout.exercise_name }}</strong> : {{ workout.due_date }}
                             </div>
                         </div>
                         <div class="collapsible-body">
