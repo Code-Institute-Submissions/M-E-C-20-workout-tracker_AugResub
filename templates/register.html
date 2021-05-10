@@ -3,6 +3,7 @@
 
     <h3 class="center-align">Register</h3>
 
+    <!-- registration form for new users -->
     <div class="row">
         <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register') }}">
             <div class="card-panel">
@@ -43,6 +44,7 @@
         </form>
     </div>
 
+    <!-- link to login page for existing users -->
     <div class="row">
         <div class="col s12">
             <p class="center-align">Already Registered? <a href="{{ url_for('login') }}"
