@@ -21,9 +21,9 @@
                     </div>
                     <div class="card-action">
                         <a href="{{ url_for('edit_exercise_db', exercise_id=exercise._id) }}" class="btn green accent-4">Edit</a>
-                        <a href="#confirm_deletion_modal" class="btn light-blue lighten-1 modal-trigger">Delete</a>
+                        <a href="#confirm_deletion_modal{{ exercise._id }}" class="btn light-blue lighten-1 modal-trigger">Delete</a>
                         <!-- confirm deletion modal -->
-                        <div id="confirm_deletion_modal" class="modal white-text">
+                        <div id="confirm_deletion_modal{{ exercise._id }}" class="modal white-text">
                             <div class="modal-content light-blue center align">
                                 <h4>Confirm Deletion</h4>
                                 <p>Are you sure you wish to delete?</p>

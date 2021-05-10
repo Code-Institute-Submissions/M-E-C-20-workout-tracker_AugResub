@@ -26,7 +26,7 @@ def welcome_page():
 
 @app.route("/get_workouts")
 def get_workouts():
-    workouts = list(mongo.db.routines.find().sort("due_date", 1))
+    workouts = list(mongo.db.routines.find())
     return render_template("workout_planner.html", workouts=workouts)
 
 
@@ -103,7 +103,7 @@ def workout_history(username):
     # grab the session user's username from db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    workouts = list(mongo.db.completed_workouts.find().sort("due_date", 1))
+    workouts = list(mongo.db.completed_workouts.find())
     return render_template(
         "workout_history.html", username=username, workouts=workouts)
 
