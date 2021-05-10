@@ -19,9 +19,14 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
+@app.route("/welcome_page")
+def welcome_page():
+    return render_template("index.html")
+
+
 @app.route("/get_workouts")
 def get_workouts():
-    workouts = list(mongo.db.routines.find())
+    workouts = list(mongo.db.routines.find().sort("due_date", 1))
     return render_template("workout_planner.html", workouts=workouts)
 
 
@@ -78,7 +83,8 @@ def login():
                         flash("Welcome {},".format(
                             request.form.get("username")))
                         return redirect(
-                            url_for("workout_history", username=session["user"]))
+                            url_for(
+                                "workout_history", username=session["user"]))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
@@ -97,7 +103,7 @@ def workout_history(username):
     # grab the session user's username from db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    workouts = list(mongo.db.completed_workouts.find())
+    workouts = list(mongo.db.completed_workouts.find().sort("due_date", 1))
     return render_template(
         "workout_history.html", username=username, workouts=workouts)
 
@@ -193,7 +199,8 @@ def complete_workout(workout_id):
     workout = mongo.db.routines.find_one({"_id": ObjectId(workout_id)})
     exercise = mongo.db.exercise.find().sort("exercise_name", 1)
     return render_template(
-        "complete_workout.html", exercise=exercise, workout=workout, username=username)
+        "complete_workout.html", exercise=exercise,
+        workout=workout, username=username)
 
 
 @app.route("/manage_exercises")
