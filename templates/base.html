@@ -21,22 +21,22 @@
         <div class="navbar-fixed">
             <nav class="nav-extended text-shadow grey darken-3">
                 <div class="nav-wrapper">
-                    <a href="{{ url_for('get_workouts') }}" class="brand-logo hide-on-small-only amber-text">Workout Tracker</a>
+                    <a href="{{ url_for('get_workouts') }}" class="brand-logo left hide-on-small-only amber-text">WORKOUT TRACKER</a>
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars amber-text"></i></a>
-                    <ul class="right hide-on-med-and-down">
+                    <ul class="right hide-on-med-and-down amber-text">
                         {% if session.user %}
-                        <li><a href="{{ url_for('get_workouts') }}">Workout Planner</a></li>
-                        <li><a href="{{ url_for('workout_history', username=session['user']) }}">Workout History</a>
+                        <li><a href="{{ url_for('get_workouts') }}" class=" amber-text">Workout Planner</a></li>
+                        <li><a href="{{ url_for('workout_history', username=session['user']) }}" class=" amber-text">Workout History</a>
                         </li>
-                        <li><a href="{{ url_for('add_workout') }}">New Workout</a></li>
+                        <li><a href="{{ url_for('add_workout') }}" class=" amber-text">New Workout</a></li>
                         {% if session.user|lower == "admin"|lower %}
-                        <li><a href="{{ url_for('manage_exercises') }}">Exercises</a></li>
+                        <li><a href="{{ url_for('manage_exercises') }}" class=" amber-text">Exercises</a></li>
                         {% endif %}
-                        <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                        <li><a href="{{ url_for('logout') }}" class=" amber-text">Log Out</a></li>
                         {% else %}
-                        <li><a href="{{ url_for('welcome_page') }}">Welcome</a></li>
-                        <li><a href="{{ url_for('login') }}">Log In</a></li>
-                        <li><a href="{{ url_for('register') }}">Register</a></li>
+                        <li><a href="{{ url_for('welcome_page') }}" class=" amber-text">Welcome</a></li>
+                        <li><a href="{{ url_for('login') }}" class=" amber-text">Log In</a></li>
+                        <li><a href="{{ url_for('register') }}" class=" amber-text">Register</a></li>
                         {% endif %}
                     </ul>
                 </div>
@@ -44,22 +44,22 @@
         </div>
 
         <!-- mobile sidenav -->
-        <ul class="sidenav" id="mobile-demo">
-            <li>
-                <h4 class="center-align light-blue-text text-darken-4">Workout Tracker</h4>
+        <ul class="sidenav text-shadow grey darken-3 center-align" id="mobile-demo">
+            <li class=" center-align">
+                <i class="fas fa-dumbbell amber-text"></i>
             </li>
             {% if session.user %}
-                <li><a href="{{ url_for('get_workouts') }}">Workout Planner</a></li>
-                <li><a href="{{ url_for('workout_history', username=session['user']) }}">Workout History</a></li>
-                <li><a href="{{ url_for('add_workout') }}">New Workout</a></li>
+                <li><a href="{{ url_for('get_workouts') }}" class=" amber-text">Workout Planner</a></li>
+                <li><a href="{{ url_for('workout_history', username=session['user']) }}" class=" amber-text">Workout History</a></li>
+                <li><a href="{{ url_for('add_workout') }}" class=" amber-text">New Workout</a></li>
             {% if session.user|lower == "admin"|lower %}
-                <li><a href="{{ url_for('manage_exercises') }}">Exercises</a></li>
+                <li><a href="{{ url_for('manage_exercises') }}" class=" amber-text">Exercises</a></li>
             {% endif %}
-                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                <li><a href="{{ url_for('logout') }}" class=" amber-text">Log Out</a></li>
             {% else %}
-                <li><a href="{{ url_for('welcome_page') }}">Welcome</a></li>
-                <li><a href="{{ url_for('login') }}">Log In</a></li>
-                <li><a href="{{ url_for('register') }}">Register</a></li>
+                <li><a href="{{ url_for('welcome_page') }}" class=" amber-text">Welcome</a></li>
+                <li><a href="{{ url_for('login') }}" class=" amber-text">Log In</a></li>
+                <li><a href="{{ url_for('register') }}" class=" amber-text">Register</a></li>
             {% endif %}
         </ul>
     </header>
