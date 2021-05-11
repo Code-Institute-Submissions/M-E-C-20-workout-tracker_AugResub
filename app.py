@@ -4,6 +4,7 @@ from flask import (
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
@@ -26,8 +27,12 @@ def welcome_page():
 
 @app.route("/get_workouts")
 def get_workouts():
+    # retrieve the list of planned workouts and sort them by date
     workouts = list(mongo.db.routines.find())
-    return render_template("workout_planner.html", workouts=workouts)
+    sorted_workouts = sorted(
+        workouts, key=lambda x: datetime.strptime(
+            x["due_date"], "%d %B, %Y"), reverse=False)
+    return render_template("workout_planner.html", workouts=sorted_workouts)
 
 
 @app.route("/search", methods=["GET", "POST"])
@@ -103,9 +108,13 @@ def workout_history(username):
     # grab the session user's username from db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
+    # retrieve the list of completed workouts and sort them by date
     workouts = list(mongo.db.completed_workouts.find())
+    sorted_workouts = sorted(
+        workouts, key=lambda x: datetime.strptime(
+            x["due_date"], "%d %B, %Y"), reverse=False)
     return render_template(
-        "workout_history.html", username=username, workouts=workouts)
+        "workout_history.html", username=username, workouts=sorted_workouts)
 
 
 @app.route("/logout")
