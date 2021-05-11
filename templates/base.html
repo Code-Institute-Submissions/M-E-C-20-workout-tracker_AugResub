@@ -18,27 +18,30 @@
 
     <header>
         <!-- top navbar -->
-        <nav class="nav-extended text-shadow deep-purple darken-3">
-            <div class="nav-wrapper">
-                <a href="{{ url_for('get_workouts') }}" class="brand-logo">Workout Tracker</a>
-                <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
-                <ul class="right hide-on-med-and-down">
-                    {% if session.user %}
+        <div class="navbar-fixed">
+            <nav class="nav-extended text-shadow deep-purple darken-3">
+                <div class="nav-wrapper">
+                    <a href="{{ url_for('get_workouts') }}" class="brand-logo hide-on-small-only">Workout Tracker</a>
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
+                    <ul class="right hide-on-med-and-down">
+                        {% if session.user %}
                         <li><a href="{{ url_for('get_workouts') }}">Workout Planner</a></li>
-                        <li><a href="{{ url_for('workout_history', username=session['user']) }}">Workout History</a></li>
+                        <li><a href="{{ url_for('workout_history', username=session['user']) }}">Workout History</a>
+                        </li>
                         <li><a href="{{ url_for('add_workout') }}">New Workout</a></li>
                         {% if session.user|lower == "admin"|lower %}
-                            <li><a href="{{ url_for('manage_exercises') }}">Exercises</a></li>
+                        <li><a href="{{ url_for('manage_exercises') }}">Exercises</a></li>
                         {% endif %}
                         <li><a href="{{ url_for('logout') }}">Log Out</a></li>
-                    {% else %}
+                        {% else %}
                         <li><a href="{{ url_for('welcome_page') }}">Welcome</a></li>
                         <li><a href="{{ url_for('login') }}">Log In</a></li>
                         <li><a href="{{ url_for('register') }}">Register</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-        </nav>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
 
         <!-- mobile sidenav -->
         <ul class="sidenav" id="mobile-demo">
