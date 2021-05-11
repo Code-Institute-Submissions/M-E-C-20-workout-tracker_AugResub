@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h3 class="grey-text text-darken-3 center-align">My Planned Workouts</h3>
+    <!-- page heading -->
+    <div class="row">
+        <div class="col s12 underline">
+            <h3 class="grey-text text-darken-3 center-align">My Planned Workouts</h3>
+        </div>
+    </div>
 
     <!-- search bar -->
     <div class="row card-panel grey lighten-3">
@@ -33,10 +38,10 @@
         <div class="row">
             {% for workout in workouts %}
             {% if session.user|lower == workout.created_by|lower %}
-            <div class="col s12 m6 l4">
-                <div class="card small sticky-action grey lighten-3">
+            <div class="col s12 m6 xl4">
+                <div class="card medium sticky-action grey lighten-3">
                     <div class="card-content center-align">
-                        <span class="card-title grey-text text-darken-4">{{ workout.exercise_name }}:
+                        <span class="card-title grey-text text-darken-4 underline">{{ workout.exercise_name }}:
                             {{ workout.due_date }}
                         </span>
                         <div class="col s6 left-align">
@@ -59,7 +64,8 @@
                         </div>
                     </div>
                     <div class="card-action center-align">
-                        <div class="col s12 m4">
+                        <!-- delete button -->
+                        <div class="col s12 m6 l4">
                             <a href="#confirm_deletion_modal{{ workout._id }}"
                                 class="btn-small red accent-4 modal-trigger">Delete</a>
                         </div>
@@ -78,12 +84,12 @@
                             </div>
                         </div>
                         <!-- edit button -->
-                        <div class="col s12 m4">
+                        <div class="col s12 m6 l4">
                             <a href="{{ url_for('edit_workout', workout_id=workout._id) }}"
                                 class="btn-small light-blue lighten-1">Edit</a>
                         </div>
                         <!-- done button -->
-                        <div class="col s12 m4">
+                        <div class="col s12 m6 l4">
                             <a href="{{ url_for('complete_workout', workout_id=workout._id) }}"
                                 class="btn-small green lighten-1">Done</a>
                         </div>

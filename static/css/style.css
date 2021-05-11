@@ -21,5 +21,15 @@
 }
 
 .button-space {
-    padding-bottom: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.underline {
+    border-bottom: 3px solid #ffc107;
+}
+
+.padding-x {
+    padding-left: 0;
+    padding-right: 0;
 }

@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h3 class="grey-text text-darken-3 center-align">My Completed Workouts</h3>
+    <!-- page heading -->
+    <div class="row">
+        <div class="col s12 underline">
+            <h3 class="grey-text text-darken-3 center-align">My Completed Workouts</h3>
+        </div>
+    </div>
 
     <!-- search bar -->
     <div class="row card-panel grey lighten-3">
@@ -16,10 +21,10 @@
                     <div class="row center-align">
                         <div class="col s12 m4 offset-m2 button-space">
                             <a href="{{ url_for('workout_history', username=session['user']) }}"
-                                class="red btn text-shadow">Reset</a>
+                                class="btn amber grey-text text-darken-3">Reset</a>
                         </div>
                         <div class="col s12 m4 button-space">
-                            <button type="submit" class="light-blue darken-1 btn text-shadow">
+                            <button type="submit" class="btn grey darken-3 amber-text">
                                 <i class="fas fa-search left"></i> Search
                             </button>
                         </div>
@@ -34,12 +39,12 @@
     <div class="row">
         {% for workout in workouts %}
         {% if session.user|lower == workout.created_by|lower %}
-            <div class="col s12 m6 l4">
-                <div class="card small sticky-action grey lighten-3">
-                    <div class="card-content  center-align">
-                        <span class="card-title activator grey-text text-darken-4">{{ workout.exercise_name }}:
+            <div class="col s12 m6 xl4">
+                <div class="card medium sticky-action grey lighten-3">
+                    <div class="card-content center-align">
+                        <span class="card-title activator underline">{{ workout.exercise_name }}:
                             {{ workout.due_date }}<br>
-                            <i class="fas fa-angle-double-up"></i>
+                            <a class="btn-floating pulse grey darken-3 button-space"><i class="fas fa-angle-double-up amber-text"></i></a>
                         </span>
                         <div class="col s6 left-align">
                             <p>Weight:</p>
@@ -60,11 +65,8 @@
                             <p>{{ workout.reps }}</p>
                         </div>
                     </div>
-                    <div class="col s12 center-align">
-                        <h5>Workout Notes:</h5>
-                    </div>
-                    <div class="card-reveal center-align">
-                        <span class="card-title grey-text text-darken-4">{{ workout.exercise_name }}:
+                    <div class="card-reveal center-align grey lighten-3">
+                        <span class="card-title">{{ workout.exercise_name }}:
                             {{ workout.due_date }}<br>
                             <i class="fas fa-angle-double-down"></i>
                         </span>
