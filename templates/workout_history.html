@@ -42,7 +42,8 @@
                             <div class="col s3">
                                 <i class="fas fa-caret-down"></i>
                                 <!-- delete workout -->
-                                <a href="#confirm_deletion_modal{{ workout._id }}" class="btn-small green accent-4 modal-trigger">Delete</a>
+                                <a href="#confirm_deletion_modal{{ workout._id }}"
+                                    class="btn-small green accent-4 modal-trigger">Delete</a>
                                 <!-- confirm deletion modal -->
                                 <div id="confirm_deletion_modal{{ workout._id }}" class="modal">
                                     <div class="modal-content light-blue center align">
@@ -51,16 +52,12 @@
                                     </div>
                                     <div class="modal-footer light-blue">
                                         <div class="center-align">
-                                            <a href="#!"
-                                                class="btn-small modal-close red accent-4">Cancel</a>
+                                            <a href="#!" class="btn-small modal-close red accent-4">Cancel</a>
                                             <a href="{{ url_for('delete_completed_workout', workout_id=workout._id) }}"
                                                 class="btn-small green accent-4">Delete</a>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- edit workout -->
-                                <a href="{{ url_for('edit_workout', workout_id=workout._id) }}"
-                                    class="btn-small light-blue lighten-1">Edit</a>
                             </div>
                             <div class="col s9">
                                 <strong>{{ workout.exercise_name }}</strong> : {{ workout.due_date }}
@@ -69,7 +66,7 @@
                         <div class="collapsible-body">
                             <strong>{{ workout.weight }}</strong>
                             <p>sets x reps: {{ workout.sets }}x{{ workout.reps }}</p>
-                            <p><em>by: {{ workout.created_by }}</em></p>
+                            <p>{{ workout.workout_notes }}</p>
                         </div>
                     </li>
                 {% endif %}

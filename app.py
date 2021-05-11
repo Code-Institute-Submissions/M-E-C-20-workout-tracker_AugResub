@@ -189,6 +189,7 @@ def complete_workout(workout_id):
             "reps": request.form.get("reps"),
             "completed": completed,
             "due_date": request.form.get("due_date"),
+            "workout_notes": request.form.get("workout_notes"),
             "created_by": session["user"]
         }
         mongo.db.completed_workouts.insert_one(workout)
