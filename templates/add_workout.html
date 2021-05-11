@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h3 class="light-blue-text text darken-4 center-align">Add Workout</h3>
+    <h3 class="grey-text text-darken-3 center-align">Add Workout</h3>
 
     <!-- workout input form -->
     <div class="row card-panel grey lighten-5">
@@ -9,7 +9,7 @@
             <!-- exercise -->
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="fas fa-folder-open prefix light-blue-text text-darken-4"></i>
+                    <i class="fas fa-running prefix grey-text text-darken-3"></i>
                     <select id="exercise_name" name="exercise_name" class="validate" required>
                         <option value="" disabled selected>Choose your exercise</option>
                         {% for exercises in exercise %}
@@ -22,7 +22,7 @@
             <!-- weight -->
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="fas fa-phone prefix light-blue-text text-darken-4"></i>
+                    <i class="fas fa-dumbbell prefix grey-text text-darken-3"></i>
                     <input id="weight" name="weight" minlength="1" maxlength="15" type="tel" class="validate" required>
                     <label for="weight">Weight</label>
                 </div>
@@ -30,7 +30,7 @@
             <!-- sets -->
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="fas fa-phone prefix light-blue-text text-darken-4"></i>
+                    <i class="fas fa-list-ol prefix grey-text text-darken-3"></i>
                     <input id="sets" name="sets" minlength="1" maxlength="15" type="tel" class="validate" required>
                     <label for="sets">sets</label>
                 </div>
@@ -38,7 +38,7 @@
             <!-- reps -->
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="fas fa-phone prefix light-blue-text text-darken-4"></i>
+                    <i class="fas fa-sort-numeric-up-alt prefix grey-text text-darken-3"></i>
                     <input id="reps" name="reps" minlength="1" maxlength="15" type="tel" class="validate" required>
                     <label for="reps">reps</label>
                 </div>
@@ -46,7 +46,7 @@
             <!-- due date -->
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="fas fa-calendar-alt prefix light-blue-text text-darken-4"></i>
+                    <i class="fas fa-calendar-alt prefix grey-text text-darken-3"></i>
                     <input id="due_date" name="due_date" type="text"
                         class="datepicker validate" required>
                     <label for="due_date">Due Date</label>
