@@ -21,8 +21,13 @@
         <div class="navbar-fixed">
             <nav class="nav-extended text-shadow grey darken-3">
                 <div class="nav-wrapper">
-                    <a href="{{ url_for('get_workouts') }}"
-                        class="brand-logo left hide-on-small-only amber-text">WORKOUT TRACKER</a>
+                    {% if session.user %}
+                        <a href="{{ url_for('get_workouts') }}"
+                            class="brand-logo left hide-on-small-only amber-text">WORKOUT TRACKER</a>
+                    {% else %}
+                        <a href="{{ url_for('welcome_page') }}"
+                                class="brand-logo left hide-on-small-only amber-text">WORKOUT TRACKER</a>
+                    {% endif %}
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i
                             class="fas fa-bars amber-text"></i></a>
                     <ul class="right hide-on-med-and-down amber-text">
