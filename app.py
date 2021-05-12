@@ -37,9 +37,19 @@ def get_workouts():
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
+    # search the db for exercise name
     query = request.form.get("query")
     workouts = list(mongo.db.routines.find({"$text": {"$search": query}}))
     return render_template("workout_planner.html", workouts=workouts)
+
+
+@app.route("/search_completed_workouts", methods=["GET", "POST"])
+def search_completed_workouts():
+    # search the db for exercise name
+    locate = request.form.get("locate")
+    workouts = list(mongo.db.completed_workouts.find(
+        {"$text": {"$search": locate}}))
+    return render_template("workout_history.html", workouts=workouts)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -56,6 +66,7 @@ def register():
         password = request.form.get("password")
         confirm_password = request.form.get("confirm_password")
 
+        # passwords not matching
         if password != confirm_password:
             flash("Passwords do not match")
             return redirect(url_for("register"))
@@ -126,14 +137,13 @@ def logout():
 
 @app.route("/add_workout", methods=["GET", "POST"])
 def add_workout():
+    # retrieve workout data from form and send it to the db
     if request.method == "POST":
-        completed = "on" if request.form.get("completed") else "off"
         workout = {
             "exercise_name": request.form.get("exercise_name"),
             "weight": request.form.get("weight"),
             "sets": request.form.get("sets"),
             "reps": request.form.get("reps"),
-            "completed": completed,
             "due_date": request.form.get("due_date"),
             "created_by": session["user"]
         }
@@ -148,13 +158,11 @@ def add_workout():
 @app.route("/edit_workout/<workout_id>", methods=["GET", "POST"])
 def edit_workout(workout_id):
     if request.method == "POST":
-        completed = "on" if request.form.get("completed") else "off"
         submit = {
             "exercise_name": request.form.get("exercise_name"),
             "weight": request.form.get("weight"),
             "sets": request.form.get("sets"),
             "reps": request.form.get("reps"),
-            "completed": completed,
             "due_date": request.form.get("due_date"),
             "created_by": session["user"]
         }
@@ -169,6 +177,7 @@ def edit_workout(workout_id):
 
 @app.route("/delete_planned_workout/<workout_id>")
 def delete_planned_workout(workout_id):
+    # find workout and remove from db
     mongo.db.routines.remove({"_id": ObjectId(workout_id)})
     flash("Workout Deleted")
     return redirect(url_for("get_workouts"))
@@ -179,6 +188,7 @@ def delete_completed_workout(workout_id):
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
 
+    # find comleted workout and remove from the db
     mongo.db.completed_workouts.remove({"_id": ObjectId(workout_id)})
     flash("Workout Deleted")
     return redirect(url_for("workout_history", username=username))
@@ -189,14 +199,13 @@ def complete_workout(workout_id):
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
 
+    # update completed workouts and remove from planned workouts in the db
     if request.method == "POST":
-        completed = "on" if request.form.get("completed") else "off"
         workout = {
             "exercise_name": request.form.get("exercise_name"),
             "weight": request.form.get("weight"),
             "sets": request.form.get("sets"),
             "reps": request.form.get("reps"),
-            "completed": completed,
             "due_date": request.form.get("due_date"),
             "workout_notes": request.form.get("workout_notes"),
             "created_by": session["user"]
@@ -221,6 +230,7 @@ def manage_exercises():
 
 @app.route("/update_exercise_db", methods=["GET", "POST"])
 def update_exercise_db():
+    # update the db with new exercise
     if request.method == "POST":
         exercises = {
             "exercise_name": request.form.get("exercise_name")
@@ -234,6 +244,7 @@ def update_exercise_db():
 
 @app.route("/edit_exercise_db/<exercise_id>", methods=["GET", "POST"])
 def edit_exercise_db(exercise_id):
+    # retrieve exercise from the db and update
     if request.method == "POST":
         submit = {
             "exercise_name": request.form.get("exercise_name")
@@ -248,6 +259,7 @@ def edit_exercise_db(exercise_id):
 
 @app.route("/delete_exercise_db/<exercise_id>")
 def delete_exercise_db(exercise_id):
+    # remove exercise from the db
     mongo.db.exercise.remove({"_id": ObjectId(exercise_id)})
     flash("Exercise Successfully Deleted")
     return redirect(url_for("manage_exercises"))

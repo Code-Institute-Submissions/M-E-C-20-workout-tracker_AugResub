@@ -10,13 +10,13 @@
 
     <!-- search bar -->
     <div class="row card-panel grey lighten-3">
-        <form action="{{ url_for('search') }}" class="col s12" method="post">
+        <form action="{{ url_for('search_completed_workouts') }}" class="col s12" method="post">
             <div class="row center-align">
                 <!-- search bar input field -->
                 <div class="input-field col s12">
                     <i class="fas fa-search prefix grey-text text-darken-3 text-darken-4"></i>
-                    <input type="text" name="query" id="query" minlength="3" class="validate" required>
-                    <label for="query">Search by Exercise</label>
+                    <input type="text" name="locate" id="locate" minlength="3" class="validate" required>
+                    <label for="locate">Search by Exercise</label>
                 </div>
                 <div class="col s12">
                     <div class="row center-align">
