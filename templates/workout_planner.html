@@ -81,15 +81,15 @@
                         </div>
                         <!-- confirm deletion modal -->
                         <div id="confirm_deletion_modal{{ workout._id }}" class="modal">
-                            <div class="modal-content light-blue center align">
+                            <div class="modal-content grey lighten-3 grey-text text-darken-3 center align">
                                 <h4>Confirm Deletion</h4>
                                 <p>Are you sure you wish to delete?</p>
                             </div>
-                            <div class="modal-footer light-blue">
+                            <div class="modal-footer grey lighten-3">
                                 <div class="center-align">
-                                    <a href="#!" class="btn-small modal-close red accent-4">Cancel</a>
+                                    <a href="#!" class="btn-small modal-close grey darken-3 amber-text accent-4">Cancel</a>
                                     <a href="{{ url_for('delete_planned_workout', workout_id=workout._id) }}"
-                                        class="btn-small green accent-4">Delete</a>
+                                        class="btn-small amber grey-text text-darken-3 accent-4">Delete</a>
                                 </div>
                             </div>
                         </div>
