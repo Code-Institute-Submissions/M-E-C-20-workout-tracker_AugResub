@@ -21,12 +21,15 @@
         <div class="navbar-fixed">
             <nav class="nav-extended text-shadow grey darken-3">
                 <div class="nav-wrapper">
-                    <a href="{{ url_for('get_workouts') }}" class="brand-logo left hide-on-small-only amber-text">WORKOUT TRACKER</a>
-                    <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars amber-text"></i></a>
+                    <a href="{{ url_for('get_workouts') }}"
+                        class="brand-logo left hide-on-small-only amber-text">WORKOUT TRACKER</a>
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i
+                            class="fas fa-bars amber-text"></i></a>
                     <ul class="right hide-on-med-and-down amber-text">
                         {% if session.user %}
                         <li><a href="{{ url_for('get_workouts') }}" class=" amber-text">Workout Planner</a></li>
-                        <li><a href="{{ url_for('workout_history', username=session['user']) }}" class=" amber-text">Workout History</a>
+                        <li><a href="{{ url_for('workout_history', username=session['user']) }}"
+                                class=" amber-text">Workout History</a>
                         </li>
                         <li><a href="{{ url_for('add_workout') }}" class=" amber-text">New Workout</a></li>
                         {% if session.user|lower == "admin"|lower %}
@@ -79,7 +82,7 @@
         {% endwith %}
     </section>
 
-    <main class="container">
+    <main class="container grey-text text-darken-3">
         {% block content %}
         {% endblock %}
     </main>
