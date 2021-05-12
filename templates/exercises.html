@@ -4,14 +4,14 @@
     <!-- page heading -->
     <div class="row">
         <div class="col s12 underline">
-            <h3 class="grey-text text-darken-3 center-align">Manage Exercises</h3>
+            <h3 class="grey-text text-darken-3 center-align head-font">Manage Exercises</h3>
         </div>
     </div>
 
     <!-- add new exercise to the db -->
     <div class="row">
         <div class="col s12 center-align">
-            <a href="{{ url_for('update_exercise_db') }}" class="btn-large grey darken-3 amber-text text-shadow">
+            <a href="{{ url_for('update_exercise_db') }}" class="btn-large grey darken-3 amber-text content-font">
                 Add Exercise <i class="fas fa-plus-square right"></i>
             </a>
         </div>
@@ -21,25 +21,28 @@
         {% for exercise in exercises %}
             <div class="col s12 m6 xl3">
                 <div class="card grey lighten-3 center-align">
+                    <!-- exercise name -->
                     <div class="card-content">
-                        <span class="card-title">{{ exercise.exercise_name }}</span>
+                        <span class="card-title" id="title-font">{{ exercise.exercise_name }}</span>
                     </div>
                     <div class="card-action">
+                        <!-- edit and delete buttons -->
                         <a href="{{ url_for('edit_exercise_db', exercise_id=exercise._id) }}"
-                            class="btn grey darken-3 amber-text accent-4">Edit</a>
+                            class="btn grey darken-3 amber-text accent-4 content-font">Edit</a>
                         <a href="#confirm_deletion_modal{{ exercise._id }}"
-                            class="btn amber grey-text text-darken-3 modal-trigger">Delete</a>
+                            class="btn amber grey-text text-darken-3 content-font modal-trigger">Delete</a>
                         <!-- confirm deletion modal -->
                         <div id="confirm_deletion_modal{{ exercise._id }}" class="modal">
-                            <div class="modal-content grey lighten-3 grey-text text-darken-3 center align">
+                            <div class="modal-content grey lighten-3 grey-text text-darken-3 center align head-font">
                                 <h4>Confirm Deletion</h4>
                                 <p>Are you sure you wish to delete?</p>
                             </div>
                             <div class="modal-footer grey lighten-3">
                                 <div class="center-align">
-                                    <a href="#!" class="btn-small modal-close grey darken-3 amber-text accent-4">Cancel</a>
+                                    <a href="#!"
+                                        class="btn-small modal-close grey darken-3 amber-text accent-4 content-font">Cancel</a>
                                     <a href="{{ url_for('delete_exercise_db', exercise_id=exercise._id) }}"
-                                        class="btn-small amber grey-text text-darken-3 accent-4">Delete</a>
+                                        class="btn-small amber grey-text text-darken-3 accent-4 content-font">Delete</a>
                                 </div>
                             </div>
                         </div>

@@ -4,12 +4,12 @@
     <!-- page heading -->
     <div class="row">
         <div class="col s12 underline">
-            <h3 class="grey-text text-darken-3 center-align">Edit Workout</h3>
+            <h3 class="grey-text text-darken-3 center-align head-font">Edit Workout</h3>
         </div>
     </div>
 
     <!-- edit workout form -->
-    <div class="row card-panel grey lighten-3">
+    <div class="row card-panel grey lighten-3 content-font">
         <form class="col s12" method="POST" action="{{ url_for('edit_workout', workout_id=workout._id) }}">
             <!-- exercise -->
             <div class="row">
@@ -18,11 +18,11 @@
                     <select id="exercise_name" name="exercise_name" class="validate" required>
                         <option value="" selected>Choose your exercise</option>
                         {% for exercises in exercise %}
-                            {% if exercises.exercise_name == workout.exercise_name %}
-                                <option value="{{ exercises.exercise_name }}" selected>{{ exercises.exercise_name }}</option>
-                            {% else %}
-                                <option value="{{ exercises.exercise_name }}">{{ exercises.exercise_name }}</option>
-                            {% endif %}
+                        {% if exercises.exercise_name == workout.exercise_name %}
+                        <option value="{{ exercises.exercise_name }}" selected>{{ exercises.exercise_name }}</option>
+                        {% else %}
+                        <option value="{{ exercises.exercise_name }}">{{ exercises.exercise_name }}</option>
+                        {% endif %}
                         {% endfor %}
                     </select>
                     <label for="exercise_name">Exercise Category</label>
@@ -67,10 +67,10 @@
             <!-- edit and cancel buttons -->
             <div class="row">
                 <div class="col s12 center-align">
-                    <a href="{{ url_for('get_workouts') }}" class="btn-large red text-shadow button-space">
+                    <a href="{{ url_for('get_workouts') }}" class="btn-large red content-font button-space">
                         Cancel <i class="fas fa-times-circle right"></i>
                     </a>
-                    <button type="submit" class="btn-large grey darken-3 amber-text text-shadow button-space">
+                    <button type="submit" class="btn-large grey darken-3 amber-text content-font button-space">
                         Edit <i class="fas fa-edit right"></i>
                     </button>
                 </div>

@@ -4,14 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" type="text/css">
+
+    <!-- Materialize -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
         type="text/css">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
-        {% block styles %}
-        {% endblock %}
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+    {% block styles %}
+    {% endblock %}
+
     <title>Workout Tracker</title>
 </head>
 <body class="grey lighten-1">
@@ -23,28 +34,28 @@
                 <div class="nav-wrapper">
                     {% if session.user %}
                         <a href="{{ url_for('get_workouts') }}"
-                            class="brand-logo left hide-on-small-only amber-text">WORKOUT TRACKER</a>
+                            class="brand-logo left hide-on-small-only amber-text head-font">WORKOUT TRACKER</a>
                     {% else %}
                         <a href="{{ url_for('welcome_page') }}"
-                                class="brand-logo left hide-on-small-only amber-text">WORKOUT TRACKER</a>
+                                class="brand-logo left hide-on-small-only amber-text head-font">WORKOUT TRACKER</a>
                     {% endif %}
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i
                             class="fas fa-bars amber-text"></i></a>
-                    <ul class="right hide-on-med-and-down amber-text">
+                    <ul class="right hide-on-med-and-down content-font">
                         {% if session.user %}
-                        <li><a href="{{ url_for('get_workouts') }}" class=" amber-text">Workout Planner</a></li>
+                        <li><a href="{{ url_for('get_workouts') }}" class="amber-text content-font">Workout Planner</a></li>
                         <li><a href="{{ url_for('workout_history', username=session['user']) }}"
-                                class=" amber-text">Workout History</a>
+                                class=" amber-text content-font">Workout History</a>
                         </li>
-                        <li><a href="{{ url_for('add_workout') }}" class=" amber-text">New Workout</a></li>
+                        <li><a href="{{ url_for('add_workout') }}" class="amber-text content-font">New Workout</a></li>
                         {% if session.user|lower == "admin"|lower %}
-                        <li><a href="{{ url_for('manage_exercises') }}" class=" amber-text">Exercises</a></li>
+                        <li><a href="{{ url_for('manage_exercises') }}" class="amber-text content-font">Exercises</a></li>
                         {% endif %}
-                        <li><a href="{{ url_for('logout') }}" class=" amber-text">Log Out</a></li>
+                        <li><a href="{{ url_for('logout') }}" class="amber-text content-font">Log Out</a></li>
                         {% else %}
-                        <li><a href="{{ url_for('welcome_page') }}" class=" amber-text">Welcome</a></li>
-                        <li><a href="{{ url_for('login') }}" class=" amber-text">Log In</a></li>
-                        <li><a href="{{ url_for('register') }}" class=" amber-text">Register</a></li>
+                        <li><a href="{{ url_for('welcome_page') }}" class="amber-text content-font">Welcome</a></li>
+                        <li><a href="{{ url_for('login') }}" class="amber-text content-font">Log In</a></li>
+                        <li><a href="{{ url_for('register') }}" class="amber-text content-font">Register</a></li>
                         {% endif %}
                     </ul>
                 </div>
@@ -57,17 +68,17 @@
                 <i class="fas fa-dumbbell amber-text"></i>
             </li>
             {% if session.user %}
-                <li><a href="{{ url_for('get_workouts') }}" class=" amber-text">Workout Planner</a></li>
+                <li><a href="{{ url_for('get_workouts') }}" class="amber-text">Workout Planner</a></li>
                 <li><a href="{{ url_for('workout_history', username=session['user']) }}" class=" amber-text">Workout History</a></li>
-                <li><a href="{{ url_for('add_workout') }}" class=" amber-text">New Workout</a></li>
+                <li><a href="{{ url_for('add_workout') }}" class="amber-text">New Workout</a></li>
             {% if session.user|lower == "admin"|lower %}
-                <li><a href="{{ url_for('manage_exercises') }}" class=" amber-text">Exercises</a></li>
+                <li><a href="{{ url_for('manage_exercises') }}" class="amber-text">Exercises</a></li>
             {% endif %}
-                <li><a href="{{ url_for('logout') }}" class=" amber-text">Log Out</a></li>
+                <li><a href="{{ url_for('logout') }}" class="amber-text">Log Out</a></li>
             {% else %}
-                <li><a href="{{ url_for('welcome_page') }}" class=" amber-text">Welcome</a></li>
-                <li><a href="{{ url_for('login') }}" class=" amber-text">Log In</a></li>
-                <li><a href="{{ url_for('register') }}" class=" amber-text">Register</a></li>
+                <li><a href="{{ url_for('welcome_page') }}" class="amber-text">Welcome</a></li>
+                <li><a href="{{ url_for('login') }}" class="amber-text">Log In</a></li>
+                <li><a href="{{ url_for('register') }}" class="amber-text">Register</a></li>
             {% endif %}
         </ul>
     </header>
@@ -79,7 +90,7 @@
                 {% for message in messages %}
                     <div class="row flashes">
                         <div class="col s6 offset-s3">
-                            <h4 class="amber center-align">{{ message }}</h4>
+                            <h4 class="center-align grey-text text-darken-3 head-font">{{ message }}</h4>
                         </div>
                     </div>
                 {% endfor %}

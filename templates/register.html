@@ -4,14 +4,14 @@
     <!-- page heading -->
     <div class="row">
         <div class="col s12 underline">
-            <h3 class="grey-text text-darken-3 center-align">Register</h3>
+            <h3 class="grey-text text-darken-3 center-align head-font">Register</h3>
         </div>
     </div>
 
     <!-- registration form for new users -->
     <div class="row">
         <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register') }}">
-            <div class="card-panel grey lighten-3">
+            <div class="card-panel grey lighten-3 content-font">
                 <!-- username -->
                 <div class="row">
                     <div class="input-field col s12">
@@ -41,7 +41,7 @@
                 </div>
                 <!-- register -->
                 <div class="row">
-                    <button type="submit" class="col s12 btn-large grey darken-3 amber-text text-shadow">
+                    <button type="submit" class="col s12 btn-large grey darken-3 amber-text content-font">
                         Register <i class="fas fa-sign-in-alt"></i>
                     </button>
                 </div>
@@ -52,8 +52,8 @@
     <!-- link to login page for existing users -->
     <div class="row">
         <div class="col s12">
-            <p class="center-align">Already Registered? <a href="{{ url_for('login') }}"
-                    class="grey-text text-darken-3">Log In</a></p>
+            <p class="center-align content-font">Already Registered? <a href="{{ url_for('login') }}"
+                    class="grey-text text-darken-3">Log In <i class="fas fa-sign-in-alt"></i></a></p>
         </div>
     </div>
 

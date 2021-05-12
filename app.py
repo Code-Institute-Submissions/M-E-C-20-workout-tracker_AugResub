@@ -85,7 +85,7 @@ def login():
             if check_password_hash(
                     existing_user["password"], request.form.get("password")):
                         session["user"] = request.form.get("username").lower()
-                        flash("Welcome {},".format(
+                        flash("Welcome {}".format(
                             request.form.get("username")))
                         return redirect(
                             url_for(
@@ -138,7 +138,7 @@ def add_workout():
             "created_by": session["user"]
         }
         mongo.db.routines.insert_one(workout)
-        flash("Workout Successfully Added")
+        flash("Workout Added")
         return redirect(url_for("get_workouts"))
 
     exercise = mongo.db.exercise.find().sort("exercise_name", 1)
@@ -159,7 +159,7 @@ def edit_workout(workout_id):
             "created_by": session["user"]
         }
         mongo.db.routines.update({"_id": ObjectId(workout_id)}, submit)
-        flash("Workout Successfully Updated")
+        flash("Workout Updated")
 
     workout = mongo.db.routines.find_one({"_id": ObjectId(workout_id)})
     exercise = mongo.db.exercise.find().sort("exercise_name", 1)
@@ -170,7 +170,7 @@ def edit_workout(workout_id):
 @app.route("/delete_planned_workout/<workout_id>")
 def delete_planned_workout(workout_id):
     mongo.db.routines.remove({"_id": ObjectId(workout_id)})
-    flash("Workout Successfully Deleted")
+    flash("Workout Deleted")
     return redirect(url_for("get_workouts"))
 
 
@@ -180,7 +180,7 @@ def delete_completed_workout(workout_id):
         {"username": session["user"]})["username"]
 
     mongo.db.completed_workouts.remove({"_id": ObjectId(workout_id)})
-    flash("Workout Successfully Deleted")
+    flash("Workout Deleted")
     return redirect(url_for("workout_history", username=username))
 
 
@@ -203,7 +203,7 @@ def complete_workout(workout_id):
         }
         mongo.db.completed_workouts.insert_one(workout)
         mongo.db.routines.remove({"_id": ObjectId(workout_id)})
-        flash("Workout Successfully Added")
+        flash("Workout Added")
         return redirect(url_for("workout_history", username=username))
 
     workout = mongo.db.routines.find_one({"_id": ObjectId(workout_id)})

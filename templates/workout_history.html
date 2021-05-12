@@ -4,7 +4,7 @@
     <!-- page heading -->
     <div class="row">
         <div class="col s12 underline">
-            <h3 class="grey-text text-darken-3 center-align">My Completed Workouts</h3>
+            <h3 class="grey-text text-darken-3 center-align head-font">My Completed Workouts</h3>
         </div>
     </div>
 
@@ -12,6 +12,7 @@
     <div class="row card-panel grey lighten-3">
         <form action="{{ url_for('search') }}" class="col s12" method="post">
             <div class="row center-align">
+                <!-- search bar input field -->
                 <div class="input-field col s12">
                     <i class="fas fa-search prefix grey-text text-darken-3 text-darken-4"></i>
                     <input type="text" name="query" id="query" minlength="3" class="validate" required>
@@ -19,12 +20,13 @@
                 </div>
                 <div class="col s12">
                     <div class="row center-align">
+                        <!-- reset and search buttons -->
                         <div class="col s12 m4 offset-m2 button-space">
                             <a href="{{ url_for('workout_history', username=session['user']) }}"
-                                class="btn amber grey-text text-darken-3">Reset</a>
+                                class="btn amber grey-text text-darken-3 content-font">Reset</a>
                         </div>
                         <div class="col s12 m4 button-space">
-                            <button type="submit" class="btn grey darken-3 amber-text">
+                            <button type="submit" class="btn grey darken-3 amber-text content-font">
                                 <i class="fas fa-search left"></i> Search
                             </button>
                         </div>
@@ -34,37 +36,41 @@
         </form>
     </div>
 
-    <!-- workout history collapsible -->
+    <!-- workout history cards -->
     {% if workouts|length > 0 %}
     <div class="row">
         {% for workout in workouts %}
         {% if session.user|lower == workout.created_by|lower %}
             <div class="col s12 m6 xl4">
                 <div class="card medium sticky-action grey lighten-3">
-                    <div class="card-content center-align">
-                        <span class="card-title activator underline">{{ workout.exercise_name }}:
+                    <div class="card-content center-align flow-text">
+                        <!-- workout name and date and reveal extra information button -->
+                        <span class="card-title activator underline" id="title-font">{{ workout.exercise_name }}:
                             {{ workout.due_date }}<br>
-                            <a class="btn-floating pulse grey darken-3 button-space"><i class="fas fa-angle-double-up amber-text"></i></a>
+                            <a class="btn-floating pulse grey darken-3 button-space"><i
+                                    class="fas fa-angle-double-up amber-text"></i></a>
                         </span>
-                        <div class="col s6 left-align">
+                        <!-- completed workout information -->
+                        <div class="col s6 left-align content-font">
                             <p>Weight:</p>
                         </div>
-                        <div class="col s6 right-align">
+                        <div class="col s6 right-align content-font">
                             <p>{{ workout.weight }}</p>
                         </div>
-                        <div class="col s6 left-align">
+                        <div class="col s6 left-align content-font">
                             <p>Sets:</p>
                         </div>
-                        <div class="col s6 right-align">
+                        <div class="col s6 right-align content-font">
                             <p>{{ workout.sets }}</p>
                         </div>
-                        <div class="col s6 left-align">
+                        <div class="col s6 left-align content-font">
                             <p>Reps:</p>
                         </div>
-                        <div class="col s6 right-align">
+                        <div class="col s6 right-align content-font">
                             <p>{{ workout.reps }}</p>
                         </div>
                     </div>
+                    <!-- completed workout notes -->
                     <div class="card-reveal center-align grey lighten-3">
                         <span class="card-title">{{ workout.exercise_name }}:
                             {{ workout.due_date }}<br>
@@ -77,20 +83,22 @@
                             <p>{{ workout.workout_notes }}</p>
                         </div>
                     </div>
+                    <!-- delete button -->
                     <div class="card-action center-align">
                         <div class="col s12">
                             <a href="#confirm_deletion_modal{{ workout._id }}"
-                                class="btn-small red accent-4 modal-trigger">Delete</a>
+                                class="btn-small red accent-4 modal-trigger content-font">Delete</a>
                         </div>
                         <!-- confirm deletion modal -->
                         <div id="confirm_deletion_modal{{ workout._id }}" class="modal">
-                            <div class="modal-content grey lighten-3 grey-text text-darken-3 center align">
+                            <div class="modal-content grey lighten-3 grey-text text-darken-3 center align head-font">
                                 <h4>Confirm Deletion</h4>
                                 <p>Are you sure you wish to delete?</p>
                             </div>
                             <div class="modal-footer grey lighten-3">
                                 <div class="center-align">
-                                    <a href="#!" class="btn-small modal-close grey darken-3 amber-text accent-4">Cancel</a>
+                                    <a href="#!"
+                                        class="btn-small modal-close grey darken-3 amber-text accent-4 content-font">Cancel</a>
                                     <a href="{{ url_for('delete_completed_workout', workout_id=workout._id) }}"
                                         class="btn-small amber grey-text text-darken-3 accent-4">Delete</a>
                                 </div>
@@ -102,8 +110,9 @@
         {% endif %}
         {% endfor %}
     </div>
+    <!-- no reults found message -->
     {% else %}
-        <h3 class="red-text text-darken-4 center-align">No Results Found</h3>
+        <h3 class="red-text text-darken-4 center-align head-font">No Results Found</h3>
     {% endif %}
 
 {% endblock %}

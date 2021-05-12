@@ -4,6 +4,7 @@
 
 .flashes h4 {
     line-height: 2;
+    border: 5px dashed #ffc107;
 }
 
 .btn-small {
@@ -37,4 +38,25 @@
 .image {
     height: 70vh;
     width: 100%;
+}
+
+.head-font {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+}
+
+.content-font {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 400;
+    font-size: 1.1em;
+}
+
+.card .card-content p  {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 400;
+}
+
+#title-font {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
 }
