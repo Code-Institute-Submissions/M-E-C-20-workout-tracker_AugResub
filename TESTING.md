@@ -20,7 +20,7 @@ The devices I have chosen and their dimensions are:
 
 - On arrival to the welcome page, the user is met by two messages, one which asks the user to log in if they are returning, and another which invites them to register if they are a new user. There are also navbar links directing the user to the login and registeration pages. If a user navigates to the wrong form by accident, they have another message inviting them to either log in or register, as well as having the navbar links available to use.
 
-    ![#424242](static/images/grey-darken-3.jpg)
+    ![Welcome](static/images/welcome-desktop.jpg)
 
 ### As a new user, I would like to create a personal profile to log my workouts.
 
