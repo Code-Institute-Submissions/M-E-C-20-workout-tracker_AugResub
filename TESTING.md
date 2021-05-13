@@ -20,49 +20,49 @@ The devices I have chosen and their dimensions are:
 
 - On arrival to the welcome page, the user is met by two messages, one which asks the user to log in if they are returning, and another which invites them to register if they are a new user. There are also navbar links directing the user to the login and registeration pages. If a user navigates to the wrong form by accident, they have another message inviting them to either log in or register, as well as having the navbar links available to use.
 
-    ![Welcome](static/images/welcome-desktop.jpg)
+    ![Welcome](static/images/testing/welcome-desktop.jpg)
 
 ### As a new user, I would like to create a personal profile to log my workouts.
 
 - When a new user registers, they can add new workouts to their workout planner page which will only have their planned workouts available to see.
 
-    ![Register](static/images/register-motog4.jpg)
+    ![Register](static/images/testing/register-motog4.jpg)
 
 ### As a returning user, I want to be able to log in to my own personal user profile.
 
 - When a returning user logs in, they can add new workouts to their workout planner page which will only have their planned workouts available to see. They can also view any completed workouts.
 
-    ![Log In](static/images/login-ipad.jpg)
+    ![Log In](static/images/testing/login-ipad.jpg)
 
 ### As a returning user, I want to be able to plan workouts for the future.
 
 - When a returning user logs in, they can add new workouts to their workout planner page which will only have their planned workouts available to see. These can be edited or deleted according to the users needs.
 
-    ![Workout Planner](static/images/workout-planner-ipad.jpg)
+    ![Workout Planner](static/images/testing/workout-planner-ipad.jpg)
 
 ### As a returning user, I want to have the ability to edit planned workouts in case I feel my circumstances have changed.
 
 - A returning user can edit planned workouts according to their needs by clicking the edit button under their chosen workout. This will bring them to an edit workout form.
 
-    ![Edit Workout](static/images/edit-workout-ipad.jpg)
+    ![Edit Workout](static/images/testing/edit-workout-ipad.jpg)
 
 ### As a returning user, I wish to view my previous workouts so that I can compare my exercise progression results.
 
 - A returning user can view their previous completed workouts in the workout history section, and can search by exercise name to return all workouts with that exercise for their perusal.
 
-    ![Workout History](static/images/workout-history-desktop.jpg)
+    ![Workout History](static/images/testing/workout-history-desktop.jpg)
 
 ### As the owner, I want to present an intuitive minimalist style application that allows a user to easily navigate the site.
 
 - This site uses a simple fixed navbar with clear links to indicate their purpose to the user and make it clear the goal of the website. It uses simple colouring and minimal imagery to reduce visual stimuli to a user that may be tracking their workouts while exercising.
 
-![Workout Planner](static/images/workout-planner-ipad.jpg)
+![Workout Planner](static/images/testing/workout-planner-ipad.jpg)
 
 ### As the owner, the application must be responsive, to allow users to track their workouts as they train, or to have the choice of adding, editing or deleting their workout data from any other device.
 
 - The application is usable on any sized device and navigating the site, a user can move between pages without the use of the browser forward and back buttons. All content is clearly visible and scales correctly to screen size without obscuring any content or overspill.
 
-    ![Exercises](static/images/exercises-fold.jpg)
+    ![Exercises](static/images/testing/exercises-fold.jpg)
 
 ## Code Validation
 
@@ -72,30 +72,82 @@ Validated my CSS by direct input in to the CSS validator and no errors were foun
 
 ### [W3C Markup Validation Service](https://validator.w3.org/#validate_by_input)
 
-- Validated index.html by direct input - one warning: 
-   -  The type attribute is unnecessary for JavaScript resources.
-Removed the type attribute from line 251 in index.html and re-ran the validator - no errors or warnings to show.
-- Validated contact.html by direct input - one error:
-    - The value of the for attribute of the label element must be the ID of a non-hidden form control. Changed for attribute to emailaddress and re-ran - no error.
+Ran each page through the validator and found no major issues.
 
 ### JSHint
 
 Ran script.js through JSHint, and found no major errors.
-![script.js]()
 
 ### Chrome Devtools
 
-- Home page:
+- Welcome:
     1. Desktop
-        >  ![Desktop]()
+        >  ![Desktop](static/images/lighthouse/lighthouse-welcome-desktop.jpg)
     2. Mobile
-        > ![Mobile]()
+        > ![Mobile](static/images/lighthouse/lighthouse-welcome-mobile.jpg)
 
-- Write to Santa page:
+- Log In:
     1. Desktop
-        > ![Desktop]()
+        > ![Desktop](static/images/lighthouse/lighthouse-login-desktop.jpg)
     2. Mobile
-        > ![Mobile]()
+        > ![Mobile](static/images/lighthouse/lighthouse-login-mobile.jpg)
+
+- Register:
+    1. Desktop
+        > ![Desktop](static/images/lighthouse/lighthouse-register-desktop.jpg)
+    2. Mobile
+        > ![Mobile](static/images/lighthouse/lighthouse-register-mobile.jpg)
+
+- Workout Planner:
+    1. Desktop
+        > ![Desktop](static/images/lighthouse/lighthouse-planner-desktop.jpg)
+    2. Mobile
+        > ![Mobile](static/images/lighthouse/lighthouse-planner-mobile.jpg)
+
+- Workout History:
+    1. Desktop
+        > ![Desktop](static/images/lighthouse/lighthouse-history-desktop.jpg)
+    2. Mobile
+        > ![Mobile](static/images/lighthouse/lighthouse-history-mobile.jpg)
+
+- Add New Workout:
+    1. Desktop
+        > ![Desktop](static/images/lighthouse/lighthouse-new-desktop.jpg)
+    2. Mobile
+        > ![Mobile](static/images/lighthouse/lighthouse-new-mobile.jpg)
+
+- Exercises:
+    1. Desktop
+        > ![Desktop](static/images/lighthouse/lighthouse-exercise-desktop.jpg)
+    2. Mobile
+        > ![Mobile](static/images/lighthouse/lighthouse-exercise-mobile.jpg)
+
+
+- Edit Workout:
+    1. Desktop
+        > ![Desktop](static/images/lighthouse/lighthouse-edit-desktop.jpg)
+    2. Mobile
+        > ![Mobile](static/images/lighthouse/lighthouse-edit-mobile.jpg)
+
+
+- Complete Workout:
+    1. Desktop
+        > ![Desktop](static/images/lighthouse/lighthouse-complete-desktop.jpg)
+    2. Mobile
+        > ![Mobile](static/images/lighthouse/lighthouse-complete-mobile.jpg)
+
+- Add Exercise:
+    1. Desktop
+        > ![Desktop](static/images/lighthouse/lighthouse-addex-desktop.jpg)
+    2. Mobile
+        > ![Mobile](static/images/lighthouse/lighthouse-addex-mobile.jpg)
+
+
+- Edit Exercise:
+    1. Desktop
+        > ![Desktop](static/images/lighthouse/lighthouse-editex-desktop.jpg)
+    2. Mobile
+        > ![Mobile](static/images/lighthouse/lighthouse-editex-mobile.jpg)
 
 ## Fixed Bugs
 
