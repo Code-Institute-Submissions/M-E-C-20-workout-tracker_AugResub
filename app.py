@@ -261,7 +261,7 @@ def edit_exercise_db(exercise_id):
 def delete_exercise_db(exercise_id):
     # remove exercise from the db
     mongo.db.exercise.remove({"_id": ObjectId(exercise_id)})
-    flash("Exercise Successfully Deleted")
+    flash("Exercise Deleted")
     return redirect(url_for("manage_exercises"))
 
 
