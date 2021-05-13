@@ -1,4 +1,4 @@
-# Testing Documentation: MS2-Nollaig
+# Testing Documentation: Workout Tracker
 
 The main README documentation can be found at [README.md](README.md)
 
@@ -69,3 +69,5 @@ Ran script.js through JSHint, and found no major errors.
         > ![Mobile]()
 
 ## Fixed Bugs
+- When performing a search request in workout history, the user was being redirected to the exercise in planned workouts instead.
+    - Fix: Created a new search index, as the search function in completed workouts was connected to the search index for planned workouts.
