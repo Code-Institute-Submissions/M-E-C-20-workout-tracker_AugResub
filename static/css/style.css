@@ -1,7 +1,3 @@
-.text-shadow {
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-}
-
 .flashes h4 {
     line-height: 2;
     background-color: #ffc107;
@@ -14,11 +10,6 @@
 .collapsible-header .col strong{
     margin: 5px;
     line-height: 42px;
-}
-
-.search-buttons {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
 }
 
 .button-space {
@@ -35,7 +26,7 @@
     padding-right: 0;
 }
 
-.image {
+.welcome-image {
     height: 70vh;
     width: 100%;
 }
