@@ -182,7 +182,7 @@ Testing documentation can be found at [TESTING.md](TESTING.md)
 ## Credits
 ### Media
 
-    Add any external media here
+The image used on the welcome page weas obtained from [Pixabay](https://www.pixabay.com/) from the content creator [mohamed_hassan](https://pixabay.com/users/mohamed_hassan-5229782/).
 
 ### Acknowledgements
 
