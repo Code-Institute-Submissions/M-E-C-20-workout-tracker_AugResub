@@ -45,8 +45,8 @@ In each section I want to keep a common navbar which will stick to the page top.
 
 ### Skeleton
 
-- [View Workouts Wireframes]()
-- [Add/Edit Workout Wireframes]()
+- [View Workouts Wireframes](https://github.com/M-E-C-20/workout-tracker/blob/master/static/wireframes/completed-and-planned-workouts.pdf)
+- [Add/Edit Workout Wireframes](https://github.com/M-E-C-20/workout-tracker/blob/master/static/wireframes/add-workouts.pdf)
 
 
 ### Surface
