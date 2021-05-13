@@ -51,19 +51,19 @@ In each section I want to keep a common navbar which will stick to the page top.
 
 - For the navbar and page headings, I used the Materialize color class grey darken-3 (#424242).
   
-  ![#424242](static/images/grey-darken-3.jpg)
+  ![#424242](static/images/testing/grey-darken-3.jpg)
 
 - For each page body I used the Materialize color class grey lighten-1 (#bdbdbd).
 
-  ![#bdbdbd](static/images/grey-lighten-1.jpg)
+  ![#bdbdbd](static/images/testing/grey-lighten-1.jpg)
 
 - For the cards which contained the site content I used the Materialize color class grey lighten-3 (#eeeeee).
 
-  ![#eeeeee](static/images/grey-lighten-3.jpg)
+  ![#eeeeee](static/images/testing/grey-lighten-3.jpg)
 
 - For contrast on buttons and on navbar content I used the Materialize color class amber (#ffc107).
 
-  ![#ffc107](static/images/amber.jpg)
+  ![#ffc107](static/images/testing/amber.jpg)
 
 I found the use of these colours to provide a nice soft contrast that wasn't harsh to look.
 
