@@ -1,5 +1,6 @@
 # Workout Tracker
 ## MS3 Code Institute Project - Data Centric Development
+***
 
 ![Responsive](static/images/img/responsive_demo.jpg)
 
@@ -10,6 +11,7 @@ There is a search function in which the user can search for specific exercises p
 [Live Website](https://workout-tracker-ms-project.herokuapp.com/)
 
 ## UX
+***
 
 ### User Stories
 
@@ -86,6 +88,8 @@ I used the Roboto Condensed font from Google Fonts for this website for its clea
 - I used the search icon on the search button to emphasise its use.
 
 ## Features
+***
+
 ### Features which all users can view:
 - Navbar - allows the user to navigate the site using the listed buttons. The company name/logo also acts as a home button.
 
@@ -120,6 +124,8 @@ I used the Roboto Condensed font from Google Fonts for this website for its clea
 - Ability to export workout data.
 
 ## Technologies Used
+***
+
 - [Balsamiq Wireframes](https://balsamiq.com/wireframes/?gclid=Cj0KCQiAhs79BRD0ARIsAC6XpaVYvwCWIORZNFLa4ZbfPQf8gAchZhdlP10mZeYDFooTFk1sW1Pua4caAgsmEALw_wcB)
   - The project uses Balsamiq Wireframes for desktop to generate wireframes for the website.
 
@@ -159,8 +165,8 @@ I used the Roboto Condensed font from Google Fonts for this website for its clea
 - [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools)
   - The project uses Chrome DevTools to analyse performance, accessibility, and best practices.
 
-- [CSS Lint](http://csslint.net/)
-  - The project uses CSS Lint as an extra testing step after initially manual checks.
+- [PEP online](http://pep8online.com/)
+  - The project uses PEP8 online to check the python code for pep8 requirements.
 
 - [W3C CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_input)
   - The project uses this to test CSS by direct input.
@@ -176,8 +182,113 @@ I used the Roboto Condensed font from Google Fonts for this website for its clea
 Testing documentation can be found at [TESTING.md](TESTING.md)
 
 ## Deployment
+***
 
-    Add deployment info here
+This project was developed in Gitpod, controlled using Git, and hosted using GitHub. The live webpage is hosted by Heroku. To deploy Workout Tracker the following steps were taken:
+
+### GitHub
+
+#### Cloning of the Repository:
+
+1. Navigate back to **M-E-C-20/workout-tracker**.
+2. Click on the **Code** button.
+3. Make sure **HTTPS** is selected.
+4. Copy the URL supplied.
+5. Open up the terminal in your IDE.
+6. Input git clone followed by the URL you copied into the terminal.
+
+```
+git clone https://github.com/M-E-C-20/workout-tracker.git
+```
+#### Installing the Requirements:
+
+* Install all requirements modules by inputting the following in the command line:
+
+```
+pip3 install -r requirements.txt
+```
+#### Creating Collections in MongoDB:
+
+* Login to your MongoDB account
+* Create a cluster
+* Create a database with following collections:
+    1. completed_workouts
+    2. exercise
+    3. routines
+    4. users
+
+#### Setting up the environmental variables:
+
+1. Create a .gitignore file in the root directory
+2. Write `env.py` and `__pycache__/` into the .gitignore file
+3. create `env.py` file
+4. On the top of the file add `import os` to set the environment variables in the operating system.
+5. In the `env.py` file write following code with YOURPASSWORD, YOURCLUSTERNAME, YOURDABASENAME and YOURSECRETKEY using the format: `os.environ.setdefault("SECRET_KEY", "YOURSECRETKEY")`
+
+#### Running the app
+
+1. In the last line of `app.py` change `debug=False` to `debug=True`
+
+2. It is possible to run the application by inputting the following in to the command line:
+
+```
+python3 app.py
+```
+### Heroku
+
+To deploy the project to Heroku the following steps need to be completed:
+
+#### Setup Heroku:
+
+1. Create a Heroku account
+2. Create a new app and select your region
+
+#### Prepare Local workspace for Heroku:
+
+1. Make a requirements.txt file by inputting the following in to the command line:
+
+```
+pip3 freeze --local > requirements.txt
+```
+(This is required for the Heroku to know which files need to be installed for the app)
+
+2. Make a Procfile in the command line:
+```
+echo web: python app.py > Procfile
+```
+(This is required for the Heroku to know at the entry point get the app up and running)
+
+#### Push the files to Heroku:
+
+1. In the command line type:
+```
+heroku login -i 
+```
+(and fill in your username and password)
+
+2. Commit all the files to Herkou, in CLI type:
+
+```
+git push heroku master 
+```
+#### Setup the configuration variable in Heroku:
+
+1. Go to your Heroku account and navigate to the app settings.
+2. Set the keys and values as follow:
+
+| Key | Value |
+ --- | ---
+IP | 0.0.0.0
+PORT | 5000
+MONGO_URI | `mongodb+srv://root:YOURPASSWORD@YOURCLUSTERNAME.j4ah4.mongodb.net/YOURDATABASENAME?retryWrites=true&w=majority`
+SECRET_KEY | `YOURSECRETKEY`
+MONGO_DBNAME | `YOURDATABASENAME`
+
+#### Run the App in Heroku:
+
+1. Click Open app in the right corner of your Heroku account
+2. Click on the live link available in the address bar
+
 
 ## Credits
 ### Media

@@ -250,7 +250,7 @@ def edit_exercise_db(exercise_id):
             "exercise_name": request.form.get("exercise_name")
         }
         mongo.db.exercise.update({"_id": ObjectId(exercise_id)}, submit)
-        flash("Exercise Successfully Updated")
+        flash("Exercise Updated")
         return redirect(url_for("manage_exercises"))
 
     exercises = mongo.db.exercise.find_one({"_id": ObjectId(exercise_id)})
@@ -268,4 +268,4 @@ def delete_exercise_db(exercise_id):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=True)
+            debug=False)

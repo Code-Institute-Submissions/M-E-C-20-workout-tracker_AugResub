@@ -5,6 +5,7 @@ The main README documentation can be found at [README.md](README.md)
 [Live Website](https://workout-tracker-ms-project.herokuapp.com/)
 
 ## Supported Screens and Browsers
+***
 
 Unless otherwise stated, all desktop test cases have been carried out across Google Chrome, Firefox, and Microsoft Edge.
 All mobile and tablet platform based testing has been performed using Chrome Devtools virtual devices.
@@ -15,6 +16,7 @@ The devices I have chosen and their dimensions are:
  3. iPad - 768 x 1024
 
 ## Test Cases
+***
 
 ### As a new user, I wish to be directed to the appropriate place to register to the Workout Tracker.
 
@@ -65,6 +67,7 @@ The devices I have chosen and their dimensions are:
     ![Exercises](static/images/testing/exercises-fold.jpg)
 
 ## Code Validation
+***
 
 ### [W3C CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_input)
 
@@ -77,6 +80,10 @@ Ran each page through the validator and found no major issues.
 ### JSHint
 
 Ran script.js through JSHint, and found no major errors.
+
+### PEP8 online
+
+Ran app.py through the validator and found no faults.
 
 ### Chrome Devtools
 
@@ -150,6 +157,7 @@ Ran script.js through JSHint, and found no major errors.
         > ![Mobile](static/images/lighthouse/lighthouse-editex-mobile.jpg)
 
 ## Manual Testing
+***
 
 ### base.hmtl
 action taken | expected result | pass/fail
@@ -296,6 +304,7 @@ Input exercise name, click add exercise | displays exercises.html, displays flas
 Click cancel | displays exercises.html | pass
 
 ## Fixed Bugs
+***
 
 - When performing a search request in workout history, the user was being redirected to the exercise in planned workouts instead.
     - Fix: Created a new search index, as the search function in completed workouts was connected to the search index for planned workouts.
