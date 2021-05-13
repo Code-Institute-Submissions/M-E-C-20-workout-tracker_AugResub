@@ -1,7 +1,7 @@
 # Workout Tracker
 ## MS3 Code Institute Project - Data Centric Development
 
-![Responsive](static/images/responsive_demo.jpg)
+![Responsive](static/images/img/responsive_demo.jpg)
 
 Workout Tracker is a simple to use responsive website for tracking weight training workouts. Users will be directed to either log in or register from the welcome page. From there they will be able to plan workouts by adding exercises with sets and reps to a certain day. From there they can edit, delete or mark as done and view completed workouts as needed.
 

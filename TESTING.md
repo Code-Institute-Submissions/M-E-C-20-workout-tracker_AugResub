@@ -56,7 +56,7 @@ The devices I have chosen and their dimensions are:
 
 - This site uses a simple fixed navbar with clear links to indicate their purpose to the user and make it clear the goal of the website. It uses simple colouring and minimal imagery to reduce visual stimuli to a user that may be tracking their workouts while exercising.
 
-![Workout Planner](static/images/testing/workout-planner-ipad.jpg)
+    ![Workout Planner](static/images/testing/workout-planner-ipad.jpg)
 
 ### As the owner, the application must be responsive, to allow users to track their workouts as they train, or to have the choice of adding, editing or deleting their workout data from any other device.
 
@@ -148,6 +148,152 @@ Ran script.js through JSHint, and found no major errors.
         > ![Desktop](static/images/lighthouse/lighthouse-editex-desktop.jpg)
     2. Mobile
         > ![Mobile](static/images/lighthouse/lighthouse-editex-mobile.jpg)
+
+## Manual Testing
+
+### base.hmtl
+action taken | expected result | pass/fail
+------------ | --------------- | ---------    
+**Logo** |
+Click Logo | display index.html if logged out, displays workout history.html if logged in | pass
+**Navbar** |
+Links displayed when not logged in | Welcome/Log in/ Register links should display | pass
+Click Log In within navbar | Display login.html | pass
+Click Register within navbar | Display register.html | pass
+Click Welcome within navbar | Display index.html | pass
+When logged in as Admin with a large screen | Workout Planner/ Workout History / New Workout / Exercises/ Log Out links should display | pass
+When logged in as user with a large screen | Workout Planner/ Workout History / New Workout / Log Out links should display | pass
+Click Workout Planner within navbar | Display workout_planner.html | pass
+Click Workout History within navbar | Display workout_history.html | pass
+Click New Workout within navbar | Display add_workout.html | pass
+Click Exercises within navbar | Display exercises.html | pass
+Click Logout within topnav | Display login.html and a flashed message | pass
+**sidenav** |
+Click burger icon | Sidenav is displayed and hidden. | pass
+When not logged in with a medium or small screen | Welcome/ Log in/ Register links should display | pass
+Click Welcome within sidenav | Display index.html | pass
+Click Log In within sidenav | Display login.html | pass
+Click Register within sidenav | Display register.html | pass
+When logged in as Admin | Workout Planner/ Workout History / New Workout / Exercises/ Log Out links should display | pass
+When logged in as user with a large screen | Workout Planner/ Workout History / New Workout / Log Out links should display | pass
+Click Workout Planner within navbar | Display workout_planner.html | pass
+Click Workout History within navbar | Display workout_history.html | pass
+Click New Workout within navbar | Display add_workout.html | pass
+Click Exercises within navbar | Display exercises.html | pass
+Click Logout within topnav | Display login.html and a flashed message | pass
+
+### index.html
+action taken | expected result | pass/fail
+------------ | --------------- | ---------   
+Click Log In prompt | display login.html | pass
+Click Register prompt | display register.html | pass
+
+> ![Welcome](static/images/testing/welcome-desktop.jpg)
+
+### login.html
+action taken | expected result | pass/fail
+------------ | --------------- | ---------    
+Fill in log in form with correct user details | display workout_history.html, display flash message | pass
+Fill in log in form with invalid user details | display login.html, display flash message | pass
+Click Register prompt | display register.html | pass
+
+> ![Login](static/images/testing/login-fail-desktop.jpg)
+
+### register.html
+action taken | expected result | pass/fail
+------------ | --------------- | ---------    
+Fill in register form with valid details | display workout_history.html, display flash message | pass
+Fill in registration form with invalid user details | display register.html, display flash message | pass
+Click Log In prompt | display login.html | pass
+
+> ![Register](static/images/testing/register-nomatch-desktop.jpg)
+
+### workout_history.html
+action taken | expected result | pass/fail
+------------ | --------------- | ---------    
+Arrive in workout_history.html after login/registration | display workout_history.html, display flash message | pass
+Search for exercise using valid exercise names | display appropriate workouts | pass
+Search for completed exercise using invalid exercise names | display flash message 'no results found' | pass
+Click reset button on search form | displays all completed workout cards | pass
+Click on up arrow button on workout card | display workout notes | pass
+Click on delete button on workout card | display confirm deletion modal | pass
+Click on cancel button on confirm deletion modal |clears modal, displays workout_history.html | pass
+Click outside of confirm deletion modal |clears modal, displays workout_history.html | pass
+Click on delete button on confirm deletion modal |clears modal, displays workout_history.html, removes deleted workout, displays flash message | pass
+
+> ![Workout History](static/images/testing/workout-history-desktop.jpg)
+
+> ![Workout History](static/images/testing/workout-history-deletemodal-desktop.jpg)
+
+### workout_planner.html
+action taken | expected result | pass/fail
+------------ | --------------- | ---------    
+Search for completed exercise using valid exercise names | display appropriate workouts | pass
+Search for exercise using invalid exercise names | display flash message 'no results found' | pass
+Click reset button on search form | displays all planned workout cards | pass
+Click on delete button on workout card | display confirm deletion modal | pass
+Click on cancel button on confirm deletion modal |clears modal, displays workout_planner.html | pass
+Click outside of confirm deletion modal |clears modal, displays workout_planner.html | pass
+Click on delete button on confirm deletion modal |clears modal, displays workout_planer.html, removes deleted workout, displays flash message | pass
+Click on edit button on workout card | display edit_workout.html | pass
+Click on done button on workout card | display complete_workout.html | pass
+
+> ![Workout Planner](static/images/testing/workout-planner-ipad.jpg)
+
+> ![Workout Planner](static/images/testing/workout-planner-delete-success-ipad.jpg)
+
+### add_workout.html
+action taken | expected result | pass/fail
+------------ | --------------- | ---------    
+Click on exercise dropdown | display list of exercises | pass
+Fill in form with valid details | display workout_planner.html, display flash message | pass
+Fill in form with invalid details | input field displays warning | pass
+
+> ![New Workout](static/images/testing/add-workout-motog4.jpg)
+> ![New Workout](static/images/testing/add-workout-success-motog4.jpg)
+
+### edit_workout.html
+action taken | expected result | pass/fail
+------------ | --------------- | ---------    
+Click on exercise dropdown | display list of exercises | pass
+Fill in form with valid details | display edit_workout.html, display flash message | pass
+Fill in form with invalid details | input field displays warning | pass
+Click cancel button | display workout_planner.html | pass
+
+> ![New Workout](static/images/testing/edit-workout-ipad.jpg)
+
+### complete_workout.html
+action taken | expected result | pass/fail
+------------ | --------------- | ---------    
+Click on exercise dropdown | display list of exercises | pass
+Fill in form with valid details | display workout_history.html, display flash message | pass
+Fill in form with invalid details | input field displays warning | pass
+Click cancel button | display workout_planner.html | pass
+
+### exercises.html
+action taken | expected result | pass/fail
+------------ | --------------- | ---------    
+Click on delete button on exercise card | display confirm deletion modal | pass
+Click on cancel button on confirm deletion modal |clears modal, displays exercises.html | pass
+Click outside of confirm deletion modal |clears modal, displays exercises.html | pass
+Click on delete button on confirm deletion modal |clears modal, displays exercises.html, removes deleted exercise, displays flash message | pass
+Click on edit button on exercise card | display edit_exercise_db.html | pass
+Click on add exercise button | display update_exercise_db.html | pass
+
+> ![Exercises](static/images/testing/exercises-fold.jpg)
+
+### update_exercise_db.html
+action taken | expected result | pass/fail
+------------ | --------------- | ---------    
+Input exercise name, click add exercise | displays exercises.html, displays flash message | pass
+
+> ![Add Exercise](static/images/testing/add-exercise-fold.jpg)
+
+### edit_exercise_db.html
+action taken | expected result | pass/fail
+------------ | --------------- | ---------    
+Input exercise name, click add exercise | displays exercises.html, displays flash message | pass
+Click cancel | displays exercises.html | pass
 
 ## Fixed Bugs
 
