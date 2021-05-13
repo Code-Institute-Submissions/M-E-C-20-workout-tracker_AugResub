@@ -167,7 +167,7 @@ I used the Roboto Condensed font from Google Fonts for this website for its clea
 - [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools)
   - The project uses Chrome DevTools to analyse performance, accessibility, and best practices.
 
-- [PEP online](http://pep8online.com/)
+- [PEP8 online](http://pep8online.com/)
   - The project uses PEP8 online to check the python code for pep8 requirements.
 
 - [W3C CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_input)
@@ -211,9 +211,9 @@ pip3 install -r requirements.txt
 ```
 #### Creating Collections in MongoDB:
 
-* Login to your MongoDB account
-* Create a cluster
-* Create a database with following collections:
+1. Login to your MongoDB account
+2. Create a cluster
+3. Create a database with following collections:
     1. completed_workouts
     2. exercise
     3. routines
