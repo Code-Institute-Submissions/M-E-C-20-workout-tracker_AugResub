@@ -27,9 +27,16 @@ def welcome_page():
 
 @app.route("/get_workouts")
 def get_workouts():
-    # retrieve the list of planned workouts and sort them by date
-    workouts = list(mongo.db.routines.find())
-    return render_template("workout_planner.html", workouts=workouts)
+    if session.user:
+        # retrieve the list of planned workouts and sort them by date
+        workouts = list(mongo.db.routines.find())
+        sorted_workouts = sorted(
+            workouts, key=lambda x: datetime.strptime(
+                x["due_date"], "%d %B, %Y"), reverse=False)
+        return render_template("workout_planner.html", workouts=sorted_workouts)
+    else:
+        flash("You need to be logged in!")
+        return redirect(url_for("login"))
 
 
 @app.route("/search", methods=["GET", "POST"])
