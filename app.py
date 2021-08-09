@@ -22,7 +22,11 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/welcome_page")
 def welcome_page():
-    return render_template("index.html")
+    if "user" in session:
+        return redirect(url_for(
+                "workout_history", username=session["user"]))
+    else:
+        return render_template("index.html")
 
 
 @app.route("/get_workouts")
