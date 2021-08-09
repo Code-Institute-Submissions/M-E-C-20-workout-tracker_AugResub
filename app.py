@@ -27,19 +27,14 @@ def welcome_page():
 
 @app.route("/get_workouts")
 def get_workouts():
-    existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username")})
+    if "user" not in session:
+        flash("You need to log in to do that!")
 
-    if existing_user:
-        # retrieve the list of planned workouts and sort them by date
-        workouts = list(mongo.db.routines.find())
-        sorted_workouts = sorted(
-            workouts, key=lambda x: datetime.strptime(
-                x["due_date"], "%d %B, %Y"), reverse=False)
-        return render_template("workout_planner.html", workouts=sorted_workouts)
-    else:
-        flash("You need to be logged in!")
         return redirect(url_for("login"))
+    else:
+        # retrieve the list of planned workouts and sort them by date
+        workouts = list(mongo.db.routines.find().sort("_id", 1))
+        return render_template("workout_planner.html", workouts=workouts)
 
 
 @app.route("/search", methods=["GET", "POST"])
@@ -111,13 +106,14 @@ def login():
 
         if existing_user:
             # ensure hashed password matches user input
-            if check_password_hash(existing_user["password"], request.form.get("password")):
-                    session["user"] = request.form.get("username").lower()
-                    flash("Welcome {}".format(
-                        request.form.get("username")))
-                    return redirect(
-                        url_for(
-                            "workout_history", username=session["user"]))
+            if check_password_hash(
+                    existing_user["password"], request.form.get("password")):
+                session["user"] = request.form.get("username").lower()
+                flash("Welcome {}".format(
+                    request.form.get("username")))
+                return redirect(
+                    url_for(
+                        "workout_history", username=session["user"]))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
@@ -143,7 +139,10 @@ def workout_history(username):
             workouts, key=lambda x: datetime.strptime(
                 x["due_date"], "%d %B, %Y"), reverse=False)
         return render_template(
-            "workout_history.html", username=username, workouts=sorted_workouts)
+            "workout_history.html",
+            username=username,
+            workouts=sorted_workouts
+            )
     else:
         flash("You need to be logged in!")
         return redirect(url_for("login"))
@@ -158,8 +157,12 @@ def logout():
 
 @app.route("/add_workout", methods=["GET", "POST"])
 def add_workout():
+    if "user" not in session:
+        flash("You need to log in to do that!")
+
+        return redirect(url_for("login"))
     # retrieve workout data from form and send it to the db
-    if request.method == "POST":
+    elif request.method == "POST":
         workout = {
             "exercise_name": request.form.get("exercise_name"),
             "weight": request.form.get("weight"),
@@ -209,7 +212,7 @@ def delete_completed_workout(workout_id):
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
 
-    # find comleted workout and remove from the db
+    # find completed workout and remove from the db
     mongo.db.completed_workouts.remove({"_id": ObjectId(workout_id)})
     flash("Workout Deleted")
     return redirect(url_for("workout_history", username=username))
@@ -245,14 +248,29 @@ def complete_workout(workout_id):
 
 @app.route("/manage_exercises")
 def manage_exercises():
-    exercises = list(mongo.db.exercise.find().sort("exercise_name", 1))
-    return render_template("exercises.html", exercises=exercises)
+    # prevent unauthorised users from accessing the exercise db
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+
+    if username != "admin":
+        flash("You do not have admin permissions!")
+        return redirect(url_for("get_workouts"))
+    else:
+        exercises = list(mongo.db.exercise.find().sort("exercise_name", 1))
+        return render_template("exercises.html", exercises=exercises)
 
 
 @app.route("/update_exercise_db", methods=["GET", "POST"])
 def update_exercise_db():
+    # prevent unauthorised users from accessing the exercise db
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+
+    if username != "admin":
+        flash("You do not have admin permissions!")
+        return redirect(url_for("get_workouts"))
     # update the db with new exercise
-    if request.method == "POST":
+    elif request.method == "POST":
         exercises = {
             "exercise_name": request.form.get("exercise_name")
         }
@@ -265,8 +283,15 @@ def update_exercise_db():
 
 @app.route("/edit_exercise_db/<exercise_id>", methods=["GET", "POST"])
 def edit_exercise_db(exercise_id):
+    # prevent unauthorised users from accessing the exercise db
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+
+    if username != "admin":
+        flash("You do not have admin permissions!")
+        return redirect(url_for("get_workouts"))
     # retrieve exercise from the db and update
-    if request.method == "POST":
+    elif request.method == "POST":
         submit = {
             "exercise_name": request.form.get("exercise_name")
         }
@@ -280,10 +305,18 @@ def edit_exercise_db(exercise_id):
 
 @app.route("/delete_exercise_db/<exercise_id>")
 def delete_exercise_db(exercise_id):
-    # remove exercise from the db
-    mongo.db.exercise.remove({"_id": ObjectId(exercise_id)})
-    flash("Exercise Deleted")
-    return redirect(url_for("manage_exercises"))
+    # prevent unauthorised users from accessing the exercise db
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+
+    if username != "admin":
+        flash("You do not have admin permissions!")
+        return redirect(url_for("get_workouts"))
+    else:
+        # remove exercise from the db
+        mongo.db.exercise.remove({"_id": ObjectId(exercise_id)})
+        flash("Exercise Deleted")
+        return redirect(url_for("manage_exercises"))
 
 
 if __name__ == "__main__":
