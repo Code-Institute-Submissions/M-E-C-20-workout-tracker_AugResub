@@ -29,10 +29,7 @@ def welcome_page():
 def get_workouts():
     # retrieve the list of planned workouts and sort them by date
     workouts = list(mongo.db.routines.find())
-    sorted_workouts = sorted(
-        workouts, key=lambda x: datetime.strptime(
-            x["due_date"], "%d %B, %Y"), reverse=False)
-    return render_template("workout_planner.html", workouts=sorted_workouts)
+    return render_template("workout_planner.html", workouts=workouts)
 
 
 @app.route("/search", methods=["GET", "POST"])
