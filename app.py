@@ -27,7 +27,10 @@ def welcome_page():
 
 @app.route("/get_workouts")
 def get_workouts():
-    if session.user:
+    existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username")})
+
+    if existing_user:
         # retrieve the list of planned workouts and sort them by date
         workouts = list(mongo.db.routines.find())
         sorted_workouts = sorted(
@@ -49,11 +52,17 @@ def search():
 
 @app.route("/search_completed_workouts", methods=["GET", "POST"])
 def search_completed_workouts():
-    # search the db for exercise name
-    locate = request.form.get("locate")
-    workouts = list(mongo.db.completed_workouts.find(
-        {"$text": {"$search": locate}}))
-    return render_template("workout_history.html", workouts=workouts)
+    existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username")})
+    if existing_user:
+        # search the db for exercise name
+        locate = request.form.get("locate")
+        workouts = list(mongo.db.completed_workouts.find(
+            {"$text": {"$search": locate}}))
+        return render_template("workout_history.html", workouts=workouts)
+    else:
+        flash("You need to be logged in!")
+        return redirect(url_for("login"))
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -90,21 +99,25 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    if request.method == "POST":
+    if "user" in session:
+        return redirect(url_for(
+                "workout_history", username=session["user"]))
+    elif request.method != "POST":
+        return render_template("login.html")
+    else:
         # check if username exists in db
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
 
         if existing_user:
             # ensure hashed password matches user input
-            if check_password_hash(
-                    existing_user["password"], request.form.get("password")):
-                        session["user"] = request.form.get("username").lower()
-                        flash("Welcome {}".format(
-                            request.form.get("username")))
-                        return redirect(
-                            url_for(
-                                "workout_history", username=session["user"]))
+            if check_password_hash(existing_user["password"], request.form.get("password")):
+                    session["user"] = request.form.get("username").lower()
+                    flash("Welcome {}".format(
+                        request.form.get("username")))
+                    return redirect(
+                        url_for(
+                            "workout_history", username=session["user"]))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
@@ -123,13 +136,17 @@ def workout_history(username):
     # grab the session user's username from db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    # retrieve the list of completed workouts and sort them by date
-    workouts = list(mongo.db.completed_workouts.find())
-    sorted_workouts = sorted(
-        workouts, key=lambda x: datetime.strptime(
-            x["due_date"], "%d %B, %Y"), reverse=False)
-    return render_template(
-        "workout_history.html", username=username, workouts=sorted_workouts)
+    if username:
+        # retrieve the list of completed workouts and sort them by date
+        workouts = list(mongo.db.completed_workouts.find())
+        sorted_workouts = sorted(
+            workouts, key=lambda x: datetime.strptime(
+                x["due_date"], "%d %B, %Y"), reverse=False)
+        return render_template(
+            "workout_history.html", username=username, workouts=sorted_workouts)
+    else:
+        flash("You need to be logged in!")
+        return redirect(url_for("login"))
 
 
 @app.route("/logout")
